@@ -1,0 +1,90 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: xjseck's Home  #网站标题
+subtitle: xjseck   #副标题
+description: Xjseck blog #描述
+author: xjseck    #作者
+language: zh-CN     #作者
+timezone: Asia/Shanghai  #时区
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://www.xjseck.com
+root: /
+permalink: :year/:month/:day/:title/ #文章永久连接格式
+permalink_defaults:     #永久连接中各部分的默认值
+
+# Directory
+source_dir: source  #源文件
+public_dir: public  #公共文件夹，存放生成的站点文件
+tag_dir: tags #标签文件夹
+archive_dir: archives  #归档文件夹
+category_dir: categories #分类文件夹
+code_dir: downloads/code
+i18n_dir: :lang  #国际化
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts  新文章标题
+default_layout: post #默认模板
+titlecase: false # Transform title into titlecase 标题转化成大写 
+external_link: true # Open external links in new tab 新标签页里打开连接
+filename_case: 0  # 把文件名转换为1小写2大写
+render_drafts: false
+post_asset_folder: true
+relative_link: false
+future: true  #语法高亮
+highlight:
+  enable: true
+  line_number: true  #显示行号
+  auto_detect: false
+  tab_replace:
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+  
+# Category & Tag
+default_category: uncategorized  #默认分类
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10    #每页的文章数
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: fexo
+
+
+
+# Deployment
+# Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/Huseck/huseck.github.io.git
+  name: Huseck
+  email: 504038236@qq.com
+  branch: master
+# deploy:
+#   type: git
+#   repo: git@github.com:Huseck/huseck.github.io.git
+#   branch: master
