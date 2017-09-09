@@ -52,16 +52,16 @@ page_nav:
     url: /search/
     target_blank: false # 在新页面打开
 
-page_nav_style: CIRCLE  # CIRCLE|ROUND_RECT
+page_nav_style: ROUND_RECT  # CIRCLE|ROUND_RECT  #设置页面导航样式
 
 # 面包屑
 breadcrumb:
-  isShow: fase # true|fase
+  isShow: true # true|fase
 
 # 盒子
 toolbox:
   isShow: true # true|fase
-  text: 盒子
+  text: 导航
 
 search_slogan:
   isShow: fase # true|fase
@@ -74,8 +74,8 @@ link_slogan:
 
 # set backtop show or hide
 backtop:
-  home: false
-  archive: false
+  home: true
+  archive: true
   category: true
   tag: true
   post: true
@@ -149,6 +149,7 @@ about:
     icon: icon-user
     text_value:
     - "新疆师范大学-xjseck"
+    - " 成员seck、tangKID"
     - "爱好CTF，喜欢信安技术，喜欢划水."
     - "web bin-re pwn android misc 划水"
   - type: Github
@@ -167,13 +168,13 @@ about:
     text_value: "504038236@qq.com"
   - type: location
     icon: icon-location
-    text_value: 新疆
+    text_value: 新疆师范大学
 
 link:
-  - name: 
-    info: 
-    url: 
-    avatar: 
+  - name:
+    info:
+    url:
+    avatar:
   # - name: Dongyado
   #   info: 生命不止，折腾不息
   #   url: http://dongyado.com/
