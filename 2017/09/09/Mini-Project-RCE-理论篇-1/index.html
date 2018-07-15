@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mini_Project_RCE_理论篇(1) | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF,RE," />
+  
+
+  <meta name="description" content="作者: tangKID 1.PE结构介绍：PE结构是Windows平台上可执行文件所必须遵循的格式，通俗的说就是后缀为.exe的文件，后期大家在Windows下碰到的各种加壳和脱壳工具的使用和编写过程都离不开PE结构。 1.1PE节区(Section):.text这个节区存放着程序的代码段的内容。.data这个节区存放着程序的数据段的内容。.idata存放着从终端输入到程序的内容。.rsrc这个节">
+<meta name="keywords" content="CTF,RE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mini_Project_RCE_理论篇(1)">
+<meta property="og:url" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="作者: tangKID 1.PE结构介绍：PE结构是Windows平台上可执行文件所必须遵循的格式，通俗的说就是后缀为.exe的文件，后期大家在Windows下碰到的各种加壳和脱壳工具的使用和编写过程都离不开PE结构。 1.1PE节区(Section):.text这个节区存放着程序的代码段的内容。.data这个节区存放着程序的数据段的内容。.idata存放着从终端输入到程序的内容。.rsrc这个节">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/1.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/2.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/3.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/4.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/5.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/6.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/7.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/8.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/9.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/10.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/11.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/12.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/13.png">
+<meta property="og:updated_time" content="2018-06-11T07:22:23.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mini_Project_RCE_理论篇(1)">
+<meta name="twitter:description" content="作者: tangKID 1.PE结构介绍：PE结构是Windows平台上可执行文件所必须遵循的格式，通俗的说就是后缀为.exe的文件，后期大家在Windows下碰到的各种加壳和脱壳工具的使用和编写过程都离不开PE结构。 1.1PE节区(Section):.text这个节区存放着程序的代码段的内容。.data这个节区存放着程序的数据段的内容。.idata存放着从终端输入到程序的内容。.rsrc这个节">
+<meta name="twitter:image" content="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-PE结构介绍："><span class="toc-text">1.PE结构介绍：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1PE节区-Section"><span class="toc-text">1.1PE节区(Section):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2PE的历史残留问题"><span class="toc-text">1.2PE的历史残留问题:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3PE头-又名NT头"><span class="toc-text">1.3PE头(又名NT头):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4PE结构在实践中的情况"><span class="toc-text">1.4PE结构在实践中的情况:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-1简单的Hello-Word"><span class="toc-text">1.4.1简单的Hello Word</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-2二进制分析"><span class="toc-text">1.4.2二进制分析:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-PE工具的介绍和使用"><span class="toc-text">1.5 PE工具的介绍和使用:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-1工具PEiD"><span class="toc-text">1.5.1工具PEiD:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-2装载我们前面的Hello-World程序"><span class="toc-text">1.5.2装载我们前面的Hello World程序:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-3节查看器"><span class="toc-text">1.5.3节查看器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-4-PE细节"><span class="toc-text">1.5.4 PE细节</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Mini-Project-RCE-理论篇-1" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Mini_Project_RCE_理论篇(1)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.09.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-Mini-Project-RCE-理论篇-1"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>作者: tangKID</p>
+<h2 id="1-PE结构介绍："><a href="#1-PE结构介绍：" class="headerlink" title="1.PE结构介绍："></a>1.PE结构介绍：</h2><p>PE结构是Windows平台上可执行文件所必须遵循的格式，通俗的说就是后缀为.exe的文件，后期大家在Windows下碰到的各种加壳和脱壳工具的使用和编写过程都离不开PE结构。</p>
+<h3 id="1-1PE节区-Section"><a href="#1-1PE节区-Section" class="headerlink" title="1.1PE节区(Section):"></a>1.1PE节区(Section):</h3><p>.text<br>这个节区存放着程序的代码段的内容。<br>.data<br>这个节区存放着程序的数据段的内容。.idata存放着从终端输入到程序的内容。<br>.rsrc<br>这个节区通常存放着一些模块的资源信息，这个模块通常使用较少.<br>当然在NT中定义了有九种预设定的section的内容，这里介绍的只是比较常见和常用的区段。</p>
+<h3 id="1-2PE的历史残留问题"><a href="#1-2PE的历史残留问题" class="headerlink" title="1.2PE的历史残留问题:"></a>1.2PE的历史残留问题:</h3><p>接触DOS的人看到这里应该就不会觉得陌生了，这里介绍的就是DOS头和DOS存根.<br>PE文件的第一个字节起始于MS-DOS头部，被称作IMAGE_DOS_HEADER(这个结构的具体内容大家上网查询就可以).</p>
+<h3 id="1-3PE头-又名NT头"><a href="#1-3PE头-又名NT头" class="headerlink" title="1.3PE头(又名NT头):"></a>1.3PE头(又名NT头):</h3><p>PE头表示为结构体IMAGE_NT_HEADERS<br>其中IMAGE_NT_HEADERS中包含着另外两个结构体:<br>1.IMAGE_FILE_HEADER   包含一些底层的硬件信息，不是特别常用。<br>2.IMAGE_OPTIONAL_HEADER32 这个结构体是PE中最大的结构体，也是包含了RE中我们比较重要的信息。</p>
+<p>其中比较重要的几项:<br>1、入口点　Entry Point<br>2、文件偏移地址 File Offset<br>3、虚拟地址 Virtual Address 简称:VA<br>4、基地址 ImageBase<br>5、相对虚拟地址 Relative Virual Address 简称:RVA<br>RVA (相对虚拟地址) =VA (虚拟地址)　－　ImageBase (基地址)<br><img src="1.png" alt=""><br>左边是存放在磁盘中，右边是加载到内存中</p>
+<h3 id="1-4PE结构在实践中的情况"><a href="#1-4PE结构在实践中的情况" class="headerlink" title="1.4PE结构在实践中的情况:"></a>1.4PE结构在实践中的情况:</h3><p><img src="2.png" alt=""><br>对一个可执行文件进行PE结构的查看</p>
+<h4 id="1-4-1简单的Hello-Word"><a href="#1-4-1简单的Hello-Word" class="headerlink" title="1.4.1简单的Hello Word"></a>1.4.1简单的Hello Word</h4><p><img src="3.png" alt=""><br>图1.4.1 程序源码</p>
+<p><img src="4.png" alt=""></p>
+<p>图1.4.2二进制打开</p>
+<h4 id="1-4-2二进制分析"><a href="#1-4-2二进制分析" class="headerlink" title="1.4.2二进制分析:"></a>1.4.2二进制分析:</h4><p>(1)看到最开始的”4D 5A”，ASCII码翻译过来就是”MZ”,也就是前面提到的DOS头,从0000000h~00000040h都是DOS头。<br><img src="5.png" alt=""><br>(2)DOS存根就是从00000040h开始直到”PE”之前都是DOS存根。<br><img src="6.png" alt=""><br>(3)从”50 45”(“PE”)开始就是PE头<br><img src="7.png" alt=""><br>(4)从PE头之后往下就是各个节区头，每个节区的起始都是”2E”<br><img src="8.png" alt=""><br>(5)各个节区头之后就是各个节区的二进制表示。</p>
+<h3 id="1-5-PE工具的介绍和使用"><a href="#1-5-PE工具的介绍和使用" class="headerlink" title="1.5 PE工具的介绍和使用:"></a>1.5 PE工具的介绍和使用:</h3><h4 id="1-5-1工具PEiD"><a href="#1-5-1工具PEiD" class="headerlink" title="1.5.1工具PEiD:"></a>1.5.1工具PEiD:</h4><p><img src="9.png" alt=""></p>
+<h4 id="1-5-2装载我们前面的Hello-World程序"><a href="#1-5-2装载我们前面的Hello-World程序" class="headerlink" title="1.5.2装载我们前面的Hello World程序:"></a>1.5.2装载我们前面的Hello World程序:</h4><p><img src="10.png" alt=""></p>
+<p>请注意，PEiD能够分析的C++程序一般在VS2013之后都会显示C++8.0。</p>
+<h4 id="1-5-3节查看器"><a href="#1-5-3节查看器" class="headerlink" title="1.5.3节查看器"></a>1.5.3节查看器</h4><p><img src="11.png" alt=""><br><img src="12.png" alt=""><br>二进制表示中的入口点</p>
+<h4 id="1-5-4-PE细节"><a href="#1-5-4-PE细节" class="headerlink" title="1.5.4 PE细节"></a>1.5.4 PE细节</h4><p><img src="13.png" alt=""></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/09/09/CTF-Web解题思路/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/09/11/从PHP基础到代码审计/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Mini-Project-RCE-理论篇-1" 
+      data-title="Mini_Project_RCE_理论篇(1)" data-url="https://www.xjseck.com/2017/09/09/Mini-Project-RCE-理论篇-1/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

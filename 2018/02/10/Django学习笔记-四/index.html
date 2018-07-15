@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django学习笔记(四) | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Django," />
+  
+
+  <meta name="description" content="前言上两篇我们学习了MVT和Models进行数据库的操作，这一篇我们还是以实例来讲解，主要学习使用Django 编写一个 注册、登录、验证码的例子。  我们将学到如下知识： Django forms表单样式排版 验证码实现的机制 cookies session 设置 Django request对象传值 Django 自带的用户登录判断    例子快速上手还是多动手敲打键盘编写代码，多动手实现。直">
+<meta name="keywords" content="Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django学习笔记(四)">
+<meta property="og:url" content="https://www.xjseck.com/2018/02/10/Django学习笔记-四/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="前言上两篇我们学习了MVT和Models进行数据库的操作，这一篇我们还是以实例来讲解，主要学习使用Django 编写一个 注册、登录、验证码的例子。  我们将学到如下知识： Django forms表单样式排版 验证码实现的机制 cookies session 设置 Django request对象传值 Django 自带的用户登录判断    例子快速上手还是多动手敲打键盘编写代码，多动手实现。直">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2018/02/10/Django学习笔记-四/1.jpg">
+<meta property="og:image" content="https://www.xjseck.com/2018/02/10/Django学习笔记-四/2.jpg">
+<meta property="og:updated_time" content="2018-07-15T17:02:15.315Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django学习笔记(四)">
+<meta name="twitter:description" content="前言上两篇我们学习了MVT和Models进行数据库的操作，这一篇我们还是以实例来讲解，主要学习使用Django 编写一个 注册、登录、验证码的例子。  我们将学到如下知识： Django forms表单样式排版 验证码实现的机制 cookies session 设置 Django request对象传值 Django 自带的用户登录判断    例子快速上手还是多动手敲打键盘编写代码，多动手实现。直">
+<meta name="twitter:image" content="https://www.xjseck.com/2018/02/10/Django学习笔记-四/1.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#例子四（1）"><span class="toc-text">例子四（1）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子四（2）"><span class="toc-text">例子四（2）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题二验证码"><span class="toc-text">问题二验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-text">结束语</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Django学习笔记-四" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Django学习笔记(四)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Django/">Django</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-Django学习笔记-四"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>上两篇我们学习了MVT和Models进行数据库的操作，这一篇我们还是以实例来讲解，主要学习使用Django 编写一个 注册、登录、验证码的例子。</p>
+<ul>
+<li>我们将学到如下知识：<ul>
+<li>Django forms表单样式排版</li>
+<li>验证码实现的机制 cookies session 设置</li>
+<li>Django request对象传值</li>
+<li>Django 自带的用户登录判断</li>
+</ul>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>快速上手还是多动手敲打键盘编写代码，多动手实现。直接上学例子学习，主要是先建立Django实现功能的思想，里面的细枝末节可以搜索一下相关的资料进行补充巩固学习。<br>这里介绍两种编写的方法，一种是自己设计用户登录注销管理cookies和session。另一种就是使用Django自带判断登录 注销等</p>
+<h4 id="例子四（1）"><a href="#例子四（1）" class="headerlink" title="例子四（1）"></a>例子四（1）</h4><p>验证码的部分参考<a href="https://strcpy.me/index.php/archives/176/" target="_blank" rel="noopener">https://strcpy.me/index.php/archives/176/</a><br>每次获取的验证码都需要把上次生成的验证码消除。<br>准备工作<br>以后准备工作都是相同的，设置方面也是一直的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">$python-admin startproject project  #创建项目</span><br><span class="line">$python manage.py startapp blog     #创建应用</span><br><span class="line">#设置数据库、应用加载、模板文件路径</span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    &apos;default&apos;: &#123;</span><br><span class="line">        &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,</span><br><span class="line">        &apos;NAME&apos;: &apos;django-test&apos;,</span><br><span class="line">        &apos;USER&apos;: &apos;root&apos;,</span><br><span class="line">        &apos;PASSWORD&apos;: &apos;seck@root...&apos;,</span><br><span class="line">        &apos;HOST&apos;: &apos;127.0.0.1&apos;,</span><br><span class="line">        &apos;PORT&apos;: &apos;3306&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">INSTALLED_APPS = (</span><br><span class="line">    &apos;django.contrib.admin&apos;,</span><br><span class="line">    &apos;django.contrib.auth&apos;,</span><br><span class="line">    &apos;django.contrib.contenttypes&apos;,</span><br><span class="line">    &apos;django.contrib.sessions&apos;,</span><br><span class="line">    &apos;django.contrib.messages&apos;,</span><br><span class="line">    &apos;django.contrib.staticfiles&apos;,</span><br><span class="line">    &apos;blog&apos;,</span><br><span class="line">)</span><br><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        &apos;BACKEND&apos;: &apos;django.template.backends.django.DjangoTemplates&apos;,</span><br><span class="line">        &apos;DIRS&apos;: [os.path.join(BASE_DIR, &apos;templates&apos;)],</span><br><span class="line">        &apos;APP_DIRS&apos;: True,</span><br><span class="line">        &apos;OPTIONS&apos;: &#123;</span><br><span class="line">            &apos;context_processors&apos;: [</span><br><span class="line">                &apos;django.template.context_processors.debug&apos;,</span><br><span class="line">                &apos;django.template.context_processors.request&apos;,</span><br><span class="line">                &apos;django.contrib.auth.context_processors.auth&apos;,</span><br><span class="line">                &apos;django.contrib.messages.context_processors.messages&apos;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p><strong>项目的文件结构如图</strong><br><img src="1.jpg" alt=""><br><strong>首先编写models.py 创建数据库表结构</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">#-*- coding:utf-8 _*-</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">author:seck</span><br><span class="line">time: 2018/01/28</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from django import forms</span><br><span class="line">from .views import *</span><br><span class="line">class UserRegisterForm(forms.Form):</span><br><span class="line">    username = forms.CharField(label=&apos;用户名&apos;,max_length=50)</span><br><span class="line">    password = forms.CharField(label=&apos;密码&apos;,widget=forms.PasswordInput())</span><br><span class="line">    email = forms.EmailField(label=&apos;邮箱&apos;)</span><br><span class="line">    # captcha1=captcha()</span><br><span class="line">class UserLoginForm(forms.Form):</span><br><span class="line">    username = forms.CharField(label=&apos;用户名&apos;, max_length=50)</span><br><span class="line">    password = forms.CharField(label=&apos;密码&apos;, widget=forms.PasswordInput())</span><br></pre></td></tr></table></figure></p>
+<p><strong>编写forms.py</strong></p>
+<ul>
+<li>创建类，继承form.Form</li>
+<li>页面根据类的对象自动创建html标签</li>
+<li>提交，request.POST</li>
+<li>封装到类的对象里，obj=UserInfo(request.POST)</li>
+<li>用户输入是否合法</li>
+<li>obj.is_valid()</li>
+<li>全部合法，获取全部内容</li>
+<li>obj.clean()</li>
+<li>只有有不合法</li>
+<li>obj.errors<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">#-*- coding:utf-8 _*-</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">author:seck</span><br><span class="line">time: 2018/01/28</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from django import forms</span><br><span class="line">from .views import *</span><br><span class="line">class UserRegisterForm(forms.Form):</span><br><span class="line">    username = forms.CharField(</span><br><span class="line">        required=True,</span><br><span class="line">        error_messages=&#123;&apos;required&apos;:&apos;用户名不能为空&apos;&#125;,</span><br><span class="line">        label=&apos;用户名&apos;,max_length=50,widget=forms.TextInput(attrs=&#123;&apos;placeholder&apos;: &apos;Username&apos;,&apos;class&apos;:&apos;username11&apos;&#125;))</span><br><span class="line">    password = forms.CharField(label=&apos;密码&apos;,widget=forms.PasswordInput())</span><br><span class="line">    email = forms.EmailField(label=&apos;邮箱&apos;)</span><br><span class="line">    # captcha1=captcha()</span><br><span class="line">class UserLoginForm(forms.Form):</span><br><span class="line">    username = forms.CharField(required=True,</span><br><span class="line">        error_messages=&#123;&apos;required&apos;:&apos;用户名不能为空&apos;&#125;,label=&apos;用户名&apos;, max_length=50)</span><br><span class="line">    password = forms.CharField(label=&apos;密码&apos;, widget=forms.PasswordInput())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>attrs属性是定义在html中用户登录框的css属性名称，error_messages 确认输入的是否规范返回错误的信息比如required=True 如果没有填入用户名，就会显示“用户名不能为空”<br>细节参考<a href="http://www.cnblogs.com/zhaijunming5/category/892772.html" target="_blank" rel="noopener">http://www.cnblogs.com/zhaijunming5/category/892772.html</a><br><a href="http://www.cnblogs.com/yangmv/p/5327477.html" target="_blank" rel="noopener">http://www.cnblogs.com/yangmv/p/5327477.html</a></p>
+<p><strong>编写views.py进行控制数据传送</strong><br>关键点的信息就是使用session控制验证码的验证。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#coding:utf-8</span><br><span class="line">from django.shortcuts import render</span><br><span class="line">from django.http import HttpResponse,HttpResponseRedirect ,request</span><br><span class="line">from captcha import *</span><br><span class="line">from .forms import *</span><br><span class="line">from .models import *</span><br><span class="line"># Create your views here.</span><br><span class="line">#首先显示</span><br><span class="line">def index(request):</span><br><span class="line">    data=[]</span><br><span class="line">    try:</span><br><span class="line">        if request.session[&apos;username&apos;]:</span><br><span class="line">            seesion=request.session[&apos;username&apos;]</span><br><span class="line">            print seesion</span><br><span class="line">            if seesion:</span><br><span class="line">                data.append(seesion)</span><br><span class="line">                print &quot;login success!&quot;</span><br><span class="line">    except Exception , e:</span><br><span class="line">        print (e)</span><br><span class="line">        data.append(&apos;no login&apos;)</span><br><span class="line">    title=&quot;seck&quot;</span><br><span class="line">    print request.COOKIES</span><br><span class="line">    # return HttpResponse(&quot;&lt;img id=&apos;verifycode&apos; src=&apos;/captcha/&apos; alt=&apos;CheckCode&apos;/&gt;&quot;)</span><br><span class="line">    return render(request,&apos;blog/index.html&apos;,&#123;&apos;title&apos;:title,&apos;data&apos;:data&#125;,)</span><br><span class="line">#验证码调用</span><br><span class="line">def captcha(request):</span><br><span class="line">    Cap = Captcha(request)</span><br><span class="line">    Code =Cap.display()</span><br><span class="line">    return Code</span><br><span class="line">#注册</span><br><span class="line">def register(request):</span><br><span class="line">    if request.method == &apos;POST&apos;:</span><br><span class="line">        userform =UserRegisterForm(request.POST)</span><br><span class="line">        cap = request.POST.get(&apos;cap&apos;)</span><br><span class="line">        ca = Captcha(request)</span><br><span class="line">        if userform.is_valid():</span><br><span class="line">            username = userform.cleaned_data[&apos;username&apos;]</span><br><span class="line">            password = userform.cleaned_data[&apos;password&apos;]</span><br><span class="line">            email = userform.cleaned_data[&apos;email&apos;]</span><br><span class="line">            if ca.check(cap):</span><br><span class="line">                print &quot;The code true&quot;</span><br><span class="line">            else:</span><br><span class="line">                print &quot;The code error!&quot;</span><br><span class="line">                return HttpResponse(&quot;验证码不正确,请刷新后重新输入！&quot;)</span><br><span class="line">            if User.objects.filter(username=username):</span><br><span class="line">                print &quot;The user exits&quot;</span><br><span class="line">                return HttpResponse(&quot;用户名重复！&quot;)</span><br><span class="line">            else:</span><br><span class="line">                User.objects.create(username=username, password=password, email=email).save()</span><br><span class="line">                return HttpResponse(&apos;register success!&apos;)</span><br><span class="line">    else:</span><br><span class="line">        userform = UserRegisterForm()</span><br><span class="line">    return render(request,&apos;blog/register.html&apos;,&#123;&apos;userform&apos;:userform,&#125;)</span><br><span class="line">def login(request):</span><br><span class="line">    if request.method == &quot;POST&quot;:</span><br><span class="line">        userform = UserLoginForm(request.POST)</span><br><span class="line">        print userform.errors.get(&apos;username&apos;)</span><br><span class="line">        if userform.is_valid():</span><br><span class="line">            username = userform.cleaned_data[&apos;username&apos;]</span><br><span class="line">            password = userform.cleaned_data[&apos;password&apos;]</span><br><span class="line">            user= User.objects.filter(username__exact=username,password__exact=password)</span><br><span class="line">            if user:</span><br><span class="line">                #Step1:生成随机字符串(seesionID)</span><br><span class="line">                #Step2：通过cookie发送给客户端</span><br><span class="line">                #Step3：服务端保存 session</span><br><span class="line">                print &quot;seck&quot;</span><br><span class="line">                # print user.values()[0][username]</span><br><span class="line">                request.session[&apos;username&apos;]=username</span><br><span class="line">                print request.session</span><br><span class="line">                # return render(request,&apos;blog/index.html&apos;,&#123;&apos;userform&apos;:userform&#125;)</span><br><span class="line">                return HttpResponseRedirect(&apos;/&apos;)</span><br><span class="line">            else:</span><br><span class="line">                return HttpResponse(&apos;用户名或者密码错误！&apos;)</span><br><span class="line">    else:</span><br><span class="line">        print &quot;stsrat&quot;</span><br><span class="line">        userform=UserLoginForm()</span><br><span class="line">    return render(request,&apos;blog/login.html&apos;,&#123;&apos;userform&apos;:userform&#125;)</span><br><span class="line">def sign_out(request):</span><br><span class="line">    del request.session[&apos;username&apos;]</span><br><span class="line">    return HttpResponseRedirect(&apos;/&apos;)</span><br></pre></td></tr></table></figure>
+<p><strong>urls.py 的设置</strong><br>blog/urls.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">#-*- coding:utf-8 _*-</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">author:seck</span><br><span class="line">time: 2018/01/28</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from django.conf.urls import include, url</span><br><span class="line">from views import *</span><br><span class="line">urlpatterns = [</span><br><span class="line">    # Examples:</span><br><span class="line">    # url(r&apos;^$&apos;, &apos;blog_week_6.views.home&apos;, name=&apos;home&apos;),</span><br><span class="line">    url(r&apos;^captcha/$&apos;,captcha),</span><br><span class="line">    url(r&apos;^login/$&apos;,login),</span><br><span class="line">    url(r&apos;^register/$&apos;,register),</span><br><span class="line">    url(r&apos;^sign_out/$&apos;,sign_out),</span><br><span class="line">    url(r&apos;&apos;, index,name=&apos;index&apos;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>根目录下的urls.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from django.conf.urls import include, url</span><br><span class="line">from django.contrib import admin</span><br><span class="line">urlpatterns = [</span><br><span class="line">    # Examples:</span><br><span class="line">    # url(r&apos;^$&apos;, &apos;blog_week_8.views.home&apos;, name=&apos;home&apos;),</span><br><span class="line">    # url(r&apos;^blog/&apos;, include(&apos;blog.urls&apos;)),</span><br><span class="line">    url(r&apos;&apos;,include(&apos;blog.urls&apos;)),</span><br><span class="line">    url(r&apos;^admin/&apos;, include(admin.site.urls)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p><strong>模板文件的代码</strong><br>index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;&#123;&#123;title&#125;&#125;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;welcome &#123;% if data %&#125;&#123;% for data in data%&#125; &#123;% if &apos;no&apos; not in data %&#125; &#123;&#123;data&#125;&#125; &lt;a href=&quot;/sign_out/&quot;&gt;退出&lt;/a&gt; &#123;% endif%&#125; &#123;% endfor %&#125; &#123;% endif %&#125;&lt;/h1&gt;</span><br><span class="line">&lt;a href=&quot;/login/&quot;&gt;登录 &lt;/a&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;a href=&quot;/register/&quot;&gt;注册 &lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>login.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;登录页面&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">    &#123;% csrf_token %&#125;</span><br><span class="line">    &#123;&#123;userform&#125;&#125;</span><br><span class="line">    &lt;input type=&quot;submit&quot; name=&quot;sumit&quot; value=&quot;login&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;a href=&quot;/&quot;&gt;首页 &lt;/a&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;a href=&quot;/register/&quot;&gt;注册 &lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>register.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;注册页面&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">    &#123;% csrf_token %&#125;</span><br><span class="line">    &#123;&#123;userform&#125;&#125;</span><br><span class="line">    验证码 &lt;input type=&quot;text&quot; name=&quot;cap&quot;&gt; &lt;img src=&quot;&#123;&#123;&apos;/captcha/&apos;&#125;&#125;&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; name=&quot;sumit&quot; value=&quot;register&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;a href=&quot;/login/&quot;&gt;登录 &lt;/a&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;a href=&quot;/&quot;&gt;首页 &lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>项目代码<a href="https://github.com/Huseck/Django-study/tree/Django-study-4" target="_blank" rel="noopener">https://github.com/Huseck/Django-study/tree/Django-study-4</a><br>本篇的运行结果图<br><img src="2.jpg" alt=""></p>
+<h3 id="例子四（2）"><a href="#例子四（2）" class="headerlink" title="例子四（2）"></a>例子四（2）</h3><ul>
+<li>主要关注的几个逻辑问题<ul>
+<li>怎么判断用户名是否重名</li>
+<li>继承自带的auth.user表是否能添加我们还需要的字段</li>
+<li>使用DjangoCaptcha判断机制是否符合要求</li>
+<li>forms继承的关系和判断form表单数据</li>
+<li>准备</li>
+<li>这里我们使用自带的auth_user实现注册、登录验证。</li>
+<li>安装pip install django-simple-captcha==0.5.6</li>
+<li>配置 settings.py</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = (</span><br><span class="line">    &apos;django.contrib.admin&apos;,</span><br><span class="line">    &apos;django.contrib.auth&apos;,</span><br><span class="line">    &apos;django.contrib.contenttypes&apos;,</span><br><span class="line">    &apos;django.contrib.sessions&apos;,</span><br><span class="line">    &apos;django.contrib.messages&apos;,</span><br><span class="line">    &apos;django.contrib.staticfiles&apos;,</span><br><span class="line">    &apos;blog&apos;,</span><br><span class="line">    &apos;captcha&apos;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>根目录下的urls.py也要配置验证码的路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(r&apos;&apos;, include(&apos;blog.urls&apos;)),</span><br><span class="line">    url(r&apos;^admin/&apos;, include(admin.site.urls)),</span><br><span class="line">    url(r&apos;^captcha/&apos;, include(&apos;captcha.urls&apos;)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>之后我们生成默认的数据库，成功之后会发现是有captcha_captchastore表的<br>然后开始编写我们的forms表单，blog目录下创建forms.py文件代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line">#-*- coding:utf-8 _*-</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">author:seck</span><br><span class="line">time: 2018/02/09</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from django import forms</span><br><span class="line">from captcha.fields import CaptchaField</span><br><span class="line">from django.contrib.auth.forms import UserCreationForm, AuthenticationForm</span><br><span class="line">from .models import Users</span><br><span class="line">class CreateUser(UserCreationForm):</span><br><span class="line">    #UserCreationForm  里面自带的会验证重名</span><br><span class="line">    username = forms.CharField(error_messages=&#123;&apos;required&apos;:u&quot;用户名不能为空&quot;&#125;)</span><br><span class="line">    password = forms.CharField(widget=forms.PasswordInput(),error_messages=&#123;&apos;required&apos;:u&quot;密码不能为空&quot;&#125;)</span><br><span class="line">    email = forms.CharField()</span><br><span class="line">    captcha = CaptchaField()</span><br><span class="line">class Auth(AuthenticationForm):</span><br><span class="line">    username = forms.CharField(error_messages=&#123;&apos;required&apos;: &apos;用户名不能为空&apos;&#125;)</span><br><span class="line">    password = forms.CharField(widget=forms.PasswordInput(),error_messages=&#123;&apos;required&apos;:u&quot;密码不能为空&quot;&#125;)</span><br><span class="line">    captcha = CaptchaField()</span><br></pre></td></tr></table></figure>
+<p>我们编写一下视图函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#coding:utf-8</span><br><span class="line">from django.shortcuts import render,redirect</span><br><span class="line">from django.http import HttpResponse</span><br><span class="line">from django.contrib.auth import authenticate, login, logout</span><br><span class="line">from django.contrib.auth import models</span><br><span class="line">from django.contrib.auth.models import User</span><br><span class="line">from .forms import CreateUser,Auth</span><br><span class="line">def index(request):</span><br><span class="line">    return render(request,&apos;blog/index.html&apos;)</span><br><span class="line">def register(request):</span><br><span class="line">    createform = CreateUser(data=request.POST or None)</span><br><span class="line">    if request.method == &quot;POST&quot;:</span><br><span class="line">        if createform.is_valid():</span><br><span class="line">            username = createform.clean_username()</span><br><span class="line">            password = createform.clean_password2()</span><br><span class="line">            email = createform.clean()[&apos;email&apos;]</span><br><span class="line">            #django 默认的user表创建用户使用create_user函数</span><br><span class="line">            user = User.objects.create_user(username=username,password=password,email=email)</span><br><span class="line">            user.save()</span><br><span class="line">            return HttpResponse(u&quot;注册成功&quot;)</span><br><span class="line">        else:</span><br><span class="line">            error_msg = createform.errors</span><br><span class="line">            print error_msg</span><br><span class="line">            return render(request,&apos;blog/register.html&apos;,&#123;&quot;errors&quot;:error_msg&#125;)</span><br><span class="line">    return render(request,&apos;blog/register.html&apos;,&#123;&quot;createform&quot;:createform&#125;)</span><br><span class="line">def auth(request):</span><br><span class="line">    authform = Auth(data=request.POST or None)</span><br><span class="line">    if request.method == &quot;POST&quot;:</span><br><span class="line">        #判断输入的数据是否符合规则</span><br><span class="line">        if authform.is_valid():</span><br><span class="line">            login(request,authform.get_user())</span><br><span class="line">            return render(request,&apos;blog/index.html&apos;,&#123;&#125;)</span><br><span class="line">        else:</span><br><span class="line">            #如果数据不符合规则，就显示错误信息</span><br><span class="line">            error_msg=authform.errors</span><br><span class="line">            print authform.errors</span><br><span class="line">            return render(request, &apos;blog/login.html&apos;, &#123;&quot;userform&quot;: authform, &quot;errors&quot;: error_msg&#125;)</span><br><span class="line">    return render(request,&apos;blog/login.html&apos;,&#123;&quot;userform&quot;:authform&#125;)</span><br><span class="line">def sign_out(request):</span><br><span class="line">    logout(request)</span><br><span class="line">    return redirect(&quot;/&quot;)</span><br></pre></td></tr></table></figure>
+<p>问题一验证重名<br>我们的CreateForm继承UserCreateForm 这个类继承User 这个又继承AbstractUser<br>然后找到关键位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在文件site-packages\django\contrib\auth\models.py  394行左右找到</span><br><span class="line">error_messages=&#123;</span><br><span class="line">            &apos;unique&apos;: _(&quot;A user with that username already exists.&quot;),</span><br><span class="line">        &#125;)</span><br><span class="line">    也就是is_valid  方法判断error是否有错误存在判断出重名  username 是unique=True 值唯一的定义</span><br></pre></td></tr></table></figure></p>
+<h3 id="问题二验证码"><a href="#问题二验证码" class="headerlink" title="问题二验证码"></a>问题二验证码</h3><p>当我们登录或者注册一个用户的时候，浏览器点击返回，在用此验证码注册其他的账号时，验证码应该是失效的，django-simple-captcha满足。<br>问题三form表单的继承<br>我们继承了UserCreationForm 和AuthenticationForm进行数据的验证，使用自带的验证方法实现用户的注册和登录。</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>当django自带的数据表和验证方法不满足需求时，需要自行扩展接口功能，实现应用。</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/01/Django学习笔记-三/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Django学习笔记-四" 
+      data-title="Django学习笔记(四)" data-url="https://www.xjseck.com/2018/02/10/Django学习笔记-四/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

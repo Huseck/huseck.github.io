@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>git控制管理学习 | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="git,仓库," />
+  
+
+  <meta name="description" content="管理github使用git配合管理github仓库首先在github上创建仓库然后就是你需要设置自己git的ssh-keys进行对自己github仓库的管理具体设置参考key-add之后就是本地创建一个git123456789101112#先创建一个文件夹和远程仓库项目的名称一样然后$ git init$ git remote add master https://github.com/Husec">
+<meta name="keywords" content="git,仓库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git控制管理学习">
+<meta property="og:url" content="https://www.xjseck.com/2017/10/27/git控制管理学习/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="管理github使用git配合管理github仓库首先在github上创建仓库然后就是你需要设置自己git的ssh-keys进行对自己github仓库的管理具体设置参考key-add之后就是本地创建一个git123456789101112#先创建一个文件夹和远程仓库项目的名称一样然后$ git init$ git remote add master https://github.com/Husec">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2017/10/27/git控制管理学习/1.png">
+<meta property="og:updated_time" content="2018-07-15T15:17:20.236Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git控制管理学习">
+<meta name="twitter:description" content="管理github使用git配合管理github仓库首先在github上创建仓库然后就是你需要设置自己git的ssh-keys进行对自己github仓库的管理具体设置参考key-add之后就是本地创建一个git123456789101112#先创建一个文件夹和远程仓库项目的名称一样然后$ git init$ git remote add master https://github.com/Husec">
+<meta name="twitter:image" content="https://www.xjseck.com/2017/10/27/git控制管理学习/1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#管理github"><span class="toc-text">管理github</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">建议以后的推送使用commit 填写修改的信息比较好回滚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、git本地仓库初始化"><span class="toc-text">1、git本地仓库初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、提交远程到仓库"><span class="toc-text">2、提交远程到仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、分支管理"><span class="toc-text">3、分支管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、合并主分区"><span class="toc-text">4、合并主分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、回滚"><span class="toc-text">5、回滚</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-git控制管理学习" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">git控制管理学习</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.27</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-git控制管理学习"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="管理github"><a href="#管理github" class="headerlink" title="管理github"></a>管理github</h2><p>使用git配合管理github仓库<br>首先在github上创建仓库<br><img src="1.png" alt=""><br>然后就是你需要设置自己git的ssh-keys进行对自己github仓库的管理<br>具体设置参考<a href="http://www.xjeck.com/2017/09/07/博客的搭建过程/" target="_blank" rel="noopener">key-add</a><br>之后就是本地创建一个git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#先创建一个文件夹和远程仓库项目的名称一样然后</span><br><span class="line">$ git init</span><br><span class="line">$ git remote add master https://github.com/Huseck/scan_kill_php_shell.git  指定远程仓库+</span><br><span class="line">$ git remote -v //显示一下信息</span><br><span class="line">$ git pull --rebase master master   获取一下readme.md 的信息</span><br><span class="line">$ git add .   //添加本地文件</span><br><span class="line">$ git commit -m &quot;first push&quot; //保存一下信息</span><br><span class="line">$ git push -u master master  //     上传</span><br><span class="line">//之后的每次文件的改变之后使用</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m &quot;修改的信息&quot;</span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure></p>
+<p></p><h3>建议以后的推送使用commit 填写修改的信息比较好回滚</h3><br>其他经常使用到的功能<br>git工具下载：<a href="https://git-scm.com/download/" target="_blank" rel="noopener">https://git-scm.com/download/</a><br>配置git信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your name&quot;</span><br><span class="line">git config --global user.email &quot;Your email&quot;</span><br></pre></td></tr></table></figure><p></p>
+<h3 id="1、git本地仓库初始化"><a href="#1、git本地仓库初始化" class="headerlink" title="1、git本地仓库初始化"></a>1、git本地仓库初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote remove/add origin git仓库地址</span><br><span class="line">git pull origin master master //取远程主分支</span><br><span class="line">git pull origin Liang Liang //取远程Liang的分支</span><br></pre></td></tr></table></figure>
+<h3 id="2、提交远程到仓库"><a href="#2、提交远程到仓库" class="headerlink" title="2、提交远程到仓库"></a>2、提交远程到仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;提交信息&quot;</span><br><span class="line">git push origin MoLiang //提交到远程分支MoLiang</span><br></pre></td></tr></table></figure>
+<h3 id="3、分支管理"><a href="#3、分支管理" class="headerlink" title="3、分支管理"></a>3、分支管理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch Liang //创建Liang的分支</span><br><span class="line">git branch origin/Liang //创建Liang的远程分支</span><br></pre></td></tr></table></figure>
+<h3 id="4、合并主分区"><a href="#4、合并主分区" class="headerlink" title="4、合并主分区"></a>4、合并主分区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout master (主分支)</span><br><span class="line">git merge origin/MoLiang</span><br><span class="line">git push origin master:master //$ git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="5、回滚"><a href="#5、回滚" class="headerlink" title="5、回滚"></a>5、回滚</h3><p>主分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$git status //查看仓库状态</span><br><span class="line">$git diff //查看本地和远程仓库的不同</span><br><span class="line">$git log 查看commit的sha1值+      --pretty=oneline参数简练显示</span><br><span class="line">$git log -p -2 //比对一下内容</span><br><span class="line">//进行回滚到上一个版本时，此时的版本就会被删除，本地的文件内容就回滚到上一个版本时的内容，之后push到仓库</span><br><span class="line">$git reset --hard b353d4653da422aa6be61696c5c6379bffd7bfc5</span><br><span class="line">$git push -f -u master master //本地和远程仓库的文件内容都回到了上一个版本</span><br><span class="line">//如果此时你后悔了，还想回到最新的版本中</span><br><span class="line">$git reflog //61e013c HEAD@&#123;7&#125;: commit: 增加相似md5值，匹配内容</span><br><span class="line">$git reset --hard 61e013c</span><br><span class="line">$git push -f -u master master</span><br><span class="line">//同想能达到后悔的目的</span><br></pre></td></tr></table></figure></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/10/16/一道有意思的注入题/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/10/27/正则调试案例/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-git控制管理学习" 
+      data-title="git控制管理学习" data-url="https://www.xjseck.com/2017/10/27/git控制管理学习/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

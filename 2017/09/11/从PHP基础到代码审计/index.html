@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>从PHP基础到代码审计 | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF,PHP," />
+  
+
+  <meta name="description" content="从入坑CTF-web开始一开始是观摩wooyun开始的，从那时开始感觉自己在学习的路上就停不下来了，也是作为“脚本小子”开始，感觉浮躁的不行，再到入坑CTF，认识了更多的人，从被虐开始，也是能让自己停下来，怎么构建自己的技能树，又怎么静下心来积淀，所以决定从头系统的学习PHP到代码审计，看看自己能做多远，少花一点时间划水了。 PHP基础记得最清楚的事情是使用工具爆破网站目录，发现类似url：ip/">
+<meta name="keywords" content="CTF,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从PHP基础到代码审计">
+<meta property="og:url" content="https://www.xjseck.com/2017/09/11/从PHP基础到代码审计/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="从入坑CTF-web开始一开始是观摩wooyun开始的，从那时开始感觉自己在学习的路上就停不下来了，也是作为“脚本小子”开始，感觉浮躁的不行，再到入坑CTF，认识了更多的人，从被虐开始，也是能让自己停下来，怎么构建自己的技能树，又怎么静下心来积淀，所以决定从头系统的学习PHP到代码审计，看看自己能做多远，少花一点时间划水了。 PHP基础记得最清楚的事情是使用工具爆破网站目录，发现类似url：ip/">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-15T11:02:48.964Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从PHP基础到代码审计">
+<meta name="twitter:description" content="从入坑CTF-web开始一开始是观摩wooyun开始的，从那时开始感觉自己在学习的路上就停不下来了，也是作为“脚本小子”开始，感觉浮躁的不行，再到入坑CTF，认识了更多的人，从被虐开始，也是能让自己停下来，怎么构建自己的技能树，又怎么静下心来积淀，所以决定从头系统的学习PHP到代码审计，看看自己能做多远，少花一点时间划水了。 PHP基础记得最清楚的事情是使用工具爆破网站目录，发现类似url：ip/">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#从入坑CTF-web开始"><span class="toc-text">从入坑CTF-web开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP基础"><span class="toc-text">PHP基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码审计"><span class="toc-text">代码审计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞总结"><span class="toc-text">漏洞总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写到最后"><span class="toc-text">写到最后</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-从PHP基础到代码审计" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">从PHP基础到代码审计</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.09.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-从PHP基础到代码审计"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="从入坑CTF-web开始"><a href="#从入坑CTF-web开始" class="headerlink" title="从入坑CTF-web开始"></a>从入坑CTF-web开始</h2><p>一开始是观摩wooyun开始的，从那时开始感觉自己在学习的路上就停不下来了，也是作为“脚本小子”开始，感觉浮躁的不行，再到入坑CTF，认识了更多的人，从被虐开始，也是能让自己停下来，怎么构建自己的技能树，又怎么静下心来积淀，所以决定从头系统的学习PHP到代码审计，看看自己能做多远，少花一点时间划水了。</p>
+<h2 id="PHP基础"><a href="#PHP基础" class="headerlink" title="PHP基础"></a>PHP基础</h2><p>记得最清楚的事情是使用工具爆破网站目录，发现类似<code>url：ip/item/index/</code>或者类似<code>ip/index.php/Controller/index</code> 发现扫描的文件却没有几个，后来发现是MVC的设计系统。<br>这里就打算从撸PHP项目，实现一些简单的项目入手学习，就由浅入深慢慢学习吧，主要参考</p>
+<blockquote>
+<p>高洛峰的《细说PHP》<br>WooYunPages<br>《深入PHP面向对象 模式与实践》</p>
+</blockquote>
+<p>后面的内容会详细介绍<a href="http://xjseck.com/category/#PHP" target="_blank" rel="noopener">PHP</a>基础的一些学习</p>
+<h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><p>主要可以从几方面进行学习总结。</p>
+<ol>
+<li>CTF题目</li>
+<li>乌云案例</li>
+<li>漏洞演示系统 (DVWA SQLI ….)</li>
+<li>开源系统</li>
+<li>审计案例</li>
+</ol>
+<h2 id="漏洞总结"><a href="#漏洞总结" class="headerlink" title="漏洞总结"></a>漏洞总结</h2><ul>
+<li>安装问题</li>
+<li>包含漏洞</li>
+<li>找回密码</li>
+<li>文件上传</li>
+<li>文件操作</li>
+<li>加密函数</li>
+<li>Xss</li>
+<li>SQLinject</li>
+<li>CSRF</li>
+<li>SSRf</li>
+<li>命令执行</li>
+<li>越权</li>
+<li>变量覆盖</li>
+<li>Xpath 注入</li>
+<li>模板注入</li>
+<li>危险函数</li>
+<li>信息泄露</li>
+<li>PHP版本特性</li>
+</ul>
+<h2 id="写到最后"><a href="#写到最后" class="headerlink" title="写到最后"></a>写到最后</h2><p>整个过程持续的时间会比较久，希望自己能够坚持下去，也希望能帮助到有此研究学习意向的 朋友。</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/09/09/Mini-Project-RCE-理论篇-1/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/09/28/VAuditDemo代码审计/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-从PHP基础到代码审计" 
+      data-title="从PHP基础到代码审计" data-url="https://www.xjseck.com/2017/09/11/从PHP基础到代码审计/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

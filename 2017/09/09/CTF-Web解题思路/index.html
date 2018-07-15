@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>CTF-Web解题思路 | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF,WEB," />
+  
+
+  <meta name="description" content="简要描述入门安全的方式个人感觉还是从CTF来入手，详细的学习路线可以 知乎上搜索，这里不再累述。Web方面还可以从wooyun镜像来学习。自己也入坑了差不多两年了，大致的总结一下解题思路和自己的一些心态体会吧。 体会当时是14年入的大学，大一打游戏度过，偶然的机会是15年大二，偶得一个学长带我参加了一下新大的安全比赛，当时的比赛水的不行，都不算是比赛吧，偶然听到了wooyun这个社区，之后就疯狂的">
+<meta name="keywords" content="CTF,WEB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF-Web解题思路">
+<meta property="og:url" content="https://www.xjseck.com/2017/09/09/CTF-Web解题思路/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="简要描述入门安全的方式个人感觉还是从CTF来入手，详细的学习路线可以 知乎上搜索，这里不再累述。Web方面还可以从wooyun镜像来学习。自己也入坑了差不多两年了，大致的总结一下解题思路和自己的一些心态体会吧。 体会当时是14年入的大学，大一打游戏度过，偶然的机会是15年大二，偶得一个学长带我参加了一下新大的安全比赛，当时的比赛水的不行，都不算是比赛吧，偶然听到了wooyun这个社区，之后就疯狂的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/CTF-Web解题思路/1.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/CTF-Web解题思路/2.png">
+<meta property="og:image" content="https://www.xjseck.com/2017/09/09/CTF-Web解题思路/3.png">
+<meta property="og:updated_time" content="2018-07-15T04:39:23.118Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CTF-Web解题思路">
+<meta name="twitter:description" content="简要描述入门安全的方式个人感觉还是从CTF来入手，详细的学习路线可以 知乎上搜索，这里不再累述。Web方面还可以从wooyun镜像来学习。自己也入坑了差不多两年了，大致的总结一下解题思路和自己的一些心态体会吧。 体会当时是14年入的大学，大一打游戏度过，偶然的机会是15年大二，偶得一个学长带我参加了一下新大的安全比赛，当时的比赛水的不行，都不算是比赛吧，偶然听到了wooyun这个社区，之后就疯狂的">
+<meta name="twitter:image" content="https://www.xjseck.com/2017/09/09/CTF-Web解题思路/1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简要描述"><span class="toc-text">简要描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#体会"><span class="toc-text">体会</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#套路考察"><span class="toc-text">套路考察</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础类"><span class="toc-text">基础类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#汇总"><span class="toc-text">汇总</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进阶类"><span class="toc-text">进阶类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线下的一些总结"><span class="toc-text">线下的一些总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#攻防模式一。沙盒模式"><span class="toc-text">攻防模式一。沙盒模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线下的经验参考"><span class="toc-text">线下的经验参考</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-CTF-Web解题思路" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">CTF-Web解题思路</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.09.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-CTF-Web解题思路"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="简要描述"><a href="#简要描述" class="headerlink" title="简要描述"></a>简要描述</h2><p>入门安全的方式个人感觉还是从CTF来入手，详细的学习路线可以 <strong>知乎</strong>上搜索，这里不再累述。Web方面还可以从wooyun镜像来学习。自己也入坑了差不多两年了，大致的总结一下解题思路和自己的一些心态体会吧。</p>
+<h2 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h2><p>当时是14年入的大学，大一打游戏度过，偶然的机会是15年大二，偶得一个学长带我参加了一下新大的安全比赛，当时的比赛水的不行，都不算是比赛吧，偶然听到了wooyun这个社区，之后就疯狂的百度浏览wooyun，获取WooYun账号，开始水群，就开始各种搜索怎么入门安全，怎么提升技能，听说了CTF，由于新疆的高校也没有CTF比赛，学校以往也是没有学长搞过，只能从网上获取，后面基本上是见到比赛就参加水群，浏览大佬们的博客，关注<a href="https://time.xctf.org.cn" target="_blank" rel="noopener">time-xctf</a>，也是浮躁的不行，也参过一些线下的CTF比赛，基本上是被血虐，其中的收获也是不少的，至少让自己在安全的路上不再是孤独的人。这里就总结一下自己学到的一些套路，也算是为自己吧，毕竟曾经爱过。</p>
+<h2 id="套路考察"><a href="#套路考察" class="headerlink" title="套路考察"></a>套路考察</h2><p>自己相对擅长WEB方面的一些题目，就总结WEB方面的套路，RE逆向的姿势可以参考tangKID小基友的总结。</p>
+<h3 id="基础类"><a href="#基础类" class="headerlink" title="基础类"></a>基础类</h3><p>使用<strong>Burp Suite</strong> 抓包基本上就能看到题目的提示和考察的知识点。<br>主要这类题目包括：<br>1.HTTP 头知识（User-Agent、XFF、referer、cookie、藏flag和自定义的一些header包括响应头）<br>2.URL知识 包括传参数、数组、字符、编码。<br>3.修改数据包绕过waf、防护或后缀名等。</p>
+<h3 id="汇总"><a href="#汇总" class="headerlink" title="汇总"></a>汇总</h3><p>引用P牛总结的题目汇总</p>
+<blockquote>
+<p>一、爆破，包括md5、爆破随机数、验证码识别等<br>二、绕WAF，包括花式绕Mysql、绕文件读取关键词检测之类拦截<br>三、花式玩弄几个PHP特性，包括弱类型，strpos和===，反序列化+destruct、\0截断、iconv截断、各种协议流<br>四、密码题，包括hash长度扩展、异或、移位加密各种变形、32位随机数过小<br>五、各种找源码技巧，包括git、svn、xxx.php.swp、<em>www</em>.(zip|tar.gz|rar|7z)、xxx.php.bak、xxx.php~<br>六、文件上传，包括花式文件后缀 .php345 .inc .phtml .phpt .phps、各种文件内容检测&lt;?php &lt;? &lt;% <code>&lt;script language=php&gt;</code>、花式解析漏洞、ffmpeg-avi-m3u-xbin<br>七、Mysql类型差异，包括和PHP弱类型类似的特性,0x、0b、1e之类，varchar和integer相互转换<br>八、open_basedir、disable_functions花式绕过技巧，包括dl、mail、imagick、bash漏洞、DirectoryIterator及各种二进制选手插足的方法<br>九、条件竞争，包括竞争删除前生成shell、竞争数据库无锁多扣钱<br>十、社工，包括花式查社工库、微博、QQ签名、whois<br>十一、windows特性，包括短文件名、IIS解析漏洞、NTFS文件系统通配符、::$DATA，冒号截断<br>十二、SSRF，包括花式探测端口，302跳转、花式协议利用、gophar直接取shell等<br>十三、XSS，各种浏览器auditor绕过、富文本过滤黑白名单绕过、flash xss、CSP绕过<br>十四、XXE，各种XML存在地方（rss/word/流媒体）、各种XXE利用方法（SSRF、文件读取）<br>十五、协议，花式IP伪造 X-Forwarded-For/Client-IP/X-Real-IP/CDN-Src-IP、花式改UA，花式藏FLAG、花式分析数据包<br>十六、逻辑错误（用户注册、已存在、长度）<br>十七、ssrf python-django-directory  比如直接127.0.0.1/../../etc/passwd</p>
+</blockquote>
+<h3 id="进阶类"><a href="#进阶类" class="headerlink" title="进阶类"></a>进阶类</h3><p>我们知道了题目的意图，可能是几个点都需要满足或者有好几层再或者是题目的页面功能比较齐全亦或者是有什么黑科技，我们就需要分析、google。先大致分析整个题目的功能和参数，一般的思路是扫描备份文件关注最近爆发的漏洞事件，进行代码分析，这里就包含的知识点就比较多了，考察代码审计的功底了，需要提升代码功底，需要学习PHP基础、MVC设计思想、框架使用，这里的就不展开后面会更新PHP学习到实操的代码审计吧，慢慢积攒吧。</p>
+<h2 id="线下的一些总结"><a href="#线下的一些总结" class="headerlink" title="线下的一些总结"></a>线下的一些总结</h2><h3 id="攻防模式一。沙盒模式"><a href="#攻防模式一。沙盒模式" class="headerlink" title="攻防模式一。沙盒模式"></a>攻防模式一。沙盒模式</h3><p><strong>2016“丝绸之路”杯网络安全精英赛</strong><br>这个算是自己比较正式的CTF线下的比赛了<br>题型 ：贴近实际的目标网站，隐含着花样的拓扑结构，有4个沙盒，各个沙盒可能有关联。</p>
+<p>入手点：一。实际的网站一般会是通用的开源框架，需要掌握流行开源框架的利用的exploit。<br>快速的定位漏洞的位置。<br>一 未果的话，快速扫描目录，是否有信息泄漏，和铭感文件。然后就是定位到后台地址，猜用户名和密码，弱口令是关键。还有待扩思路。</p>
+<p>进入后台之后的思路就是先getshell ，getshell 的思路就是后台的上传漏洞，一般是后台的编辑插件，比如fuck  edit …绕过这些插件的过滤，再者是数据库备份，数据库命令执行等等。<br>提权: 这里如果是window提权首先如果是IIS+2003使用菜刀+pr  或者就是大马+15051exp<br>来提权。如果有防护，使用组建或者免杀等方法提权。<br>获取flag：搜索flag文件，一般是在管理员的桌面。</p>
+<p>最后扩大战果：<br>快速的分析此网站所在的网络环境，是否与其他题有关联，是否还存在内网环境等。<br>信息收集的快速定位与扩大化。</p>
+<p>这次比赛的总结：<br>开始2个小时的沙盒模式，沙盒1——192.168.199.101  提示don’tscan，没有任何 的思路。<br>沙盒2——102  是一个java的题很像线上的比赛题，这里不是很懂javaweb的参数问题就是没有后缀名的内部传参  比如102/order   显示信息 102/oreder/17 显示id为是17的信息，这里不熟悉参数的问题。(赛后才知道貌似是s2漏洞)<br>沙盒3——103  是一个家具站点，asp+iis+2003，从后台弱口令admim admin  进入之后就是上传一个图片马，然后数据库备份，getshell 菜刀连接  不能执行cmd，上传一个cmd 执行命令，不是system 权限，使用菜刀+cmd+pr  提权添加用户，3389连接之后搜索flag ，最后主办方的提示：沙盒3有沙盒1的入口信息，到第二天的直接放出了沙盒1的入口点，是一个菜刀，需要你re一下，检测一下这菜刀的行为，怎么执行的。只get一个flag，并没有做更大化的信息收集，和后续的拓扑扫描。（不足点:后台备份getshell不是很熟，提权也出了一些问题）<br> <a href="http://mycms7.cn.adminftp.com/" target="_blank" rel="noopener">http://mycms7.cn.adminftp.com/</a>   沙盒3测试环境地址</p>
+<p>沙盒4—eshop 一个开源的网店系统3.0版本，follow.php注入漏洞未能触发注入，这里也忘记测试后台是否有弱口令了，经验不足。</p>
+<p>攻防模式二：web+pwn 服务器的组合。<br>环境说明 web服务 首先是一个/home/user1/wwwroot目录下有flag文件<br>Web目录权限是777 没有root权限 mysql 也是user1权限<br>Web 先说一下一开始的环境，php+mysql  权限都是 r_x权限  目录在/home/user1/wwwroot/   一开始web 我们就掉了2次分。首先搜索连接数据库的配置文件，进入数据库，修改后台的默认密码，删除其他必要的用户。然后进入web 目录下，修改目录权限。然后就坐等了一天，竟然web 就再没有掉分，我也很奇怪，人品爆发了。<br>后来听到别人的思路就是一开始，上来，猜出了mysqlroot 的弱口令，udf 提权成功了(不是很清楚)，<br>直接就2000分到手，我很想和师傅们聊聊人生。细节有待实现。<br>正确的思路是：一开始可以先拼一波手速，破解默认的admin密码，直接去后台上传文件，先getshell 再说。实际是是说web至少有5个以上的漏洞，师傅们的思路是，注入到管理员的md5，进后台，上传文件  然后包含getshell。获取权限持续得分。<br>正常的策略是tar 打包web 目录的文件到/tmp 目录下然后  scp  下载下来，审计测试。<br>目录的权限如图<br><img src="1.png" alt=""><br>Wwwroot  权限是7   子目录文件是 r 权限<br>测试udf提权(赛后问了一下大家都没有root)<br>定制脚本优化一下<br>这里修补漏洞的方式：<br>系统防护<br>Netstat  kill  进程<br>自动化脚本<br>暴力删除 敏感文件</p>
+<p>首先备份网站目录，  后续的做diff命令比对，是否被写后门shel了没有l<br> 首先我们写一个脚本<br>把我们防护的脚本包含到php文件中进行防护<br>然后可以写一个定时删除shell 文件的脚本，不允许在文件夹中写入文件</p>
+<p>一：不知道漏洞首先包含php脚本到web文件中做url 参数获取日志后续在分析<br>二：包含waf.php文件做sql注入xss、srf等漏洞的通用防护(做全局变量的防护)<br>三：审计代码发现已知漏洞，做代码上的修补<br>四：做流量的混淆，防止被人流量重放。<br>五：包含自动删除shell脚本<br>六：总结的思路，首先我们可以抓取别人的流量 然后利用别人留下的密码什么<br>比如丝绸杯  我们当时发现我们的admin 表中被添加了用户<br>我们可以用他这用户登录别人的服务器后台，然后再上传shell 什么的</p>
+<p><strong>Web 防护加固实现</strong><br>1.有root、administrator 权限的防护<br>首先环境是phpweb防护，首先直接修改php.ini    修改 设置为安全模式然后直接禁止大小马的函数，<br>disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server<br>然后再开启安全模式<br>pcntl_exec() 可以绕过<br><a href="http://security.ctocio.com.cn/tips/5/7764505_5.shtml" target="_blank" rel="noopener">http://security.ctocio.com.cn/tips/5/7764505_5.shtml</a><br>全部禁止</p>
+<p>2.非root权限的防护<br><a href="http://blog.csdn.net/andy1219111/article/details/9054277" target="_blank" rel="noopener">http://blog.csdn.net/andy1219111/article/details/9054277</a><br>打包web目录文件<br>下载保存扫描是否有内置后门<br>常规的修改默认的用户名和密码</p>
+<ol>
+<li>首先去查看web目录下链接sql的配置文件，获取数据库的密码，然后登陆数据库修改网站的默认后台密码。是否有file权限</li>
+<li>修改web目录下文件的权限，设置600，指定目录的权限设置400等，具体的文件具体设置，或者直接设置upload文件权限为chmod 000</li>
+<li>写一个自动删除shell的php脚本，白名单，自动删除目录下多出来的php文件<br>Watch –n 1 rm –rf uploads  每1秒定时删除uploads 文件</li>
+<li>加载防护waf safe 等php的脚本，抓取流量或者写脚本动态监控 脚本请参考&lt;攻防脚本中的连接地址&gt;</li>
+<li>对特定的漏洞进行代码上的修改补上漏洞。</li>
+<li>如果手速慢了被植入了内存马，一种是分析php-fmp进行进行查看，申请重启服务<br>另一种是，内存马判断文件，可以手动添加一个文件，内容可以随意了，只要存在此文件名的文件就可以了<br>7.如果主办方check的不严就直接删服务<br>8.赛后向主办方申请要自己服务的日志，一定要做赛后总结，日志分析<br>动态监控踩点防护</li>
+<li>使用server.php 抓取 get,post,request等数据包</li>
+<li>Py实施md5 检测目录，是否有新增、改动、减少等文件</li>
+<li>手动检测本地测试<br>具体办法：<br>首先，php文件内容头批量先导入抓数据包的php脚本和waf脚本<br>然后实施动态监控<br>这里功能可以预先集成在一个py 脚本中<br>具体方法和脚本在【加固脚本】文件夹中<br>漏洞查找</li>
+<li><p>首先扫描web文件，是否含有主办方隐藏的后门 附脚本：查找后门木马<br><img src="2.png" alt=""><br>Opensns  这里就印证了主办方留有后门<br>直接<br><img src="3.png" alt=""><br>可以直接刷flag</p>
+</li>
+<li><p>再一系列的防护之后，代码审计是否有包含  命令执行漏洞</p>
+</li>
+<li>确认有漏洞上传的shell到uoload文件<br>一般upload文件是777权限 所以我们可以<br>Watch –n 1 rm –rf  upload   每隔1秒 删除upload文件</li>
+<li>内存马的使用，第三届网络空间大赛中学习到使用内存马+手速的模式，然后使用批量的脚本，感觉很无解</li>
+<li>加载防护日志，抓取流量或者从别人的服务上分析shell使用别人的shell进行批量</li>
+<li>应对备份查找后门，我们可以上传一个具有上传功能的upload.php,再使用内存马来进行隐藏</li>
+<li>高一点的赛事，可能网上难以搜索到现成的exp、poc这时就需要审计代码，一般持续的时间相对比较久。<br>附一下一些通用漏洞<br>列表<br>memcache未授权访问  java反序列(struts2可以细分) jenkis jenkis配置不当<br>心脏出血 nosql未授权 glashfish任意文件读 ms10-070  padding orcles  jdwp调试漏洞 mogodb未授权   iis put解析漏洞  svn信息泄露  redis未授权   域传送 iis短文件名 ElasticSearch漏洞…..  后待续<br>一定好多动手复现，比赛的时候才能拼手速。<br>最后复现P牛的这个漏洞库<br><a href="https://github.com/phith0n/vulhub/" target="_blank" rel="noopener">https://github.com/phith0n/vulhub/</a></li>
+</ol>
+<h2 id="线下的经验参考"><a href="#线下的经验参考" class="headerlink" title="线下的经验参考"></a>线下的经验参考</h2><blockquote>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyNTA1NzAxOA==&amp;mid=2650473772&amp;idx=1&amp;sn=383dd" target="_blank" rel="noopener">http://mp.weixin.qq.com/s?__biz=MzIyNTA1NzAxOA==&amp;mid=2650473772&amp;idx=1&amp;sn=383dd</a></p>
+</blockquote>
+<blockquote>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzI0NTA3NzQ2MQ==&amp;mid=400219727&amp;idx=1&amp;sn=ef52130e5abe78231fc7ecb52dfab30d&amp;scene=23&amp;srcid=0727mNmx7vUY433OxmmAA4qZ#rd" target="_blank" rel="noopener">http://mp.weixin.qq.com/s?__biz=MzI0NTA3NzQ2MQ==&amp;mid=400219727&amp;idx=1&amp;sn=ef52130e5abe78231fc7ecb52dfab30d&amp;scene=23&amp;srcid=0727mNmx7vUY433OxmmAA4qZ#rd</a></p>
+</blockquote>
+<blockquote>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MjM5NjkyMTk5Mg==&amp;mid=200915617&amp;idx=2&amp;sn=50fb575f04e3c5b1acea6dbaf594a0d0&amp;scene=23&amp;srcid=07277VWPlLebnsrF3tO5fBrO#rd" target="_blank" rel="noopener">http://mp.weixin.qq.com/s?__biz=MjM5NjkyMTk5Mg==&amp;mid=200915617&amp;idx=2&amp;sn=50fb575f04e3c5b1acea6dbaf594a0d0&amp;scene=23&amp;srcid=07277VWPlLebnsrF3tO5fBrO#rd</a></p>
+</blockquote>
+<blockquote>
+<p><a href="http://5alt.me/posts/2014/10/AliCTF2014%E5%86%B3%E8%B5%9B%E8%AE%B0%E5%BD%95.html" target="_blank" rel="noopener">http://5alt.me/posts/2014/10/AliCTF2014%E5%86%B3%E8%B5%9B%E8%AE%B0%E5%BD%95.html</a></p>
+</blockquote>
+<blockquote>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MjM5NTU2MTQwNA==&amp;mid=2650652095&amp;idx=2&amp;sn=ba608435b3f215e8c93e58556caa1df3&amp;scene=23&amp;srcid=072784JTwY6uY8ww7yoeU701#rd" target="_blank" rel="noopener">http://mp.weixin.qq.com/s?__biz=MjM5NTU2MTQwNA==&amp;mid=2650652095&amp;idx=2&amp;sn=ba608435b3f215e8c93e58556caa1df3&amp;scene=23&amp;srcid=072784JTwY6uY8ww7yoeU701#rd</a>    linux  脚本维护系统</p>
+</blockquote>
+<blockquote>
+<p><a href="http://weibo.com/p/1001603847172578749357?mod=zwenzhang" target="_blank" rel="noopener">http://weibo.com/p/1001603847172578749357?mod=zwenzhang</a></p>
+</blockquote>
+<p>这里猥琐的不死马和进程后门</p>
+<blockquote>
+<p><a href="http://byd.dropsec.xyz/2017/05/16/CTF%E7%BA%BF%E4%B8%8B%E8%B5%9B%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7/" target="_blank" rel="noopener">http://byd.dropsec.xyz/2017/05/16/CTF%E7%BA%BF%E4%B8%8B%E8%B5%9B%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7/</a></p>
+</blockquote>
+<blockquote>
+<p><a href="http://bobao.360.cn/ctf/detail/169.html" target="_blank" rel="noopener">http://bobao.360.cn/ctf/detail/169.html</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://blog.rexskz.info/index.php/2016-nationwide-ctf-final-writeup.html" target="_blank" rel="noopener">https://blog.rexskz.info/index.php/2016-nationwide-ctf-final-writeup.html</a></p>
+</blockquote>
+<blockquote>
+<p><a href="http://rcoil.me/2017/06/CTF%E7%BA%BF%E4%B8%8B%E8%B5%9B%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">http://rcoil.me/2017/06/CTF%E7%BA%BF%E4%B8%8B%E8%B5%9B%E6%80%BB%E7%BB%93/</a></p>
+</blockquote>
+<p><strong>线下的一些脚本上传到了<a href="https://github.com/Huseck/CTF" target="_blank" rel="noopener">github</a>上了大家可以找一下</strong></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/09/07/博客的搭建过程/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/09/09/Mini-Project-RCE-理论篇-1/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-CTF-Web解题思路" 
+      data-title="CTF-Web解题思路" data-url="https://www.xjseck.com/2017/09/09/CTF-Web解题思路/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

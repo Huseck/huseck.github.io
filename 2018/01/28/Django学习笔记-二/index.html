@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django学习笔记(二) | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Django," />
+  
+
+  <meta name="description" content="前言学习最快的办法就是动手实践。  通过上一个笔记的学习，我们应该能学习到了内容如下 能使用 Django创建 项目和一些参数的说明 能清楚Django默认创建项目的文件目录结构   通过本笔记的学习我们可以学习到的知识点如下 默认创建的Django配置解读 创建app 实例一个MVT    实例从上一个笔记到这个笔记的过度，需要动手操作才能很好的掌握。Django版本1.8.5实例（二） 默认的">
+<meta name="keywords" content="Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django学习笔记(二)">
+<meta property="og:url" content="https://www.xjseck.com/2018/01/28/Django学习笔记-二/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="前言学习最快的办法就是动手实践。  通过上一个笔记的学习，我们应该能学习到了内容如下 能使用 Django创建 项目和一些参数的说明 能清楚Django默认创建项目的文件目录结构   通过本笔记的学习我们可以学习到的知识点如下 默认创建的Django配置解读 创建app 实例一个MVT    实例从上一个笔记到这个笔记的过度，需要动手操作才能很好的掌握。Django版本1.8.5实例（二） 默认的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2018/01/28/Django学习笔记-二/1.jpg">
+<meta property="og:updated_time" content="2018-07-15T16:30:53.291Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django学习笔记(二)">
+<meta name="twitter:description" content="前言学习最快的办法就是动手实践。  通过上一个笔记的学习，我们应该能学习到了内容如下 能使用 Django创建 项目和一些参数的说明 能清楚Django默认创建项目的文件目录结构   通过本笔记的学习我们可以学习到的知识点如下 默认创建的Django配置解读 创建app 实例一个MVT    实例从上一个笔记到这个笔记的过度，需要动手操作才能很好的掌握。Django版本1.8.5实例（二） 默认的">
+<meta name="twitter:image" content="https://www.xjseck.com/2018/01/28/Django学习笔记-二/1.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-text">结束语</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Django学习笔记-二" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Django学习笔记(二)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.01.28</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Django/">Django</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-Django学习笔记-二"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学习最快的办法就是动手实践。</p>
+<ul>
+<li>通过上一个笔记的学习，我们应该能学习到了内容如下<ul>
+<li>能使用 Django创建 项目和一些参数的说明</li>
+<li>能清楚Django默认创建项目的文件目录结构</li>
+</ul>
+</li>
+<li>通过本笔记的学习我们可以学习到的知识点如下<ul>
+<li>默认创建的Django配置解读</li>
+<li>创建app</li>
+<li>实例一个MVT</li>
+</ul>
+</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>从上一个笔记到这个笔记的过度，需要动手操作才能很好的掌握。Django版本1.8.5<br>实例（二）</p>
+<p>默认的配置文件了解<br>Django相关的配置都在settings.py文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"># Build paths inside the project like this: os.path.join(BASE_DIR, ...)</span><br><span class="line">import os</span><br><span class="line">BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span><br><span class="line"># Quick-start development settings - unsuitable for production</span><br><span class="line"># See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/</span><br><span class="line"># SECURITY WARNING: keep the secret key used in production secret!</span><br><span class="line">SECRET_KEY = &apos;abmu19wmz5#1qwmfc_wagpf_vh+8faqs8=#xi=mik1+4*9b*dv&apos;</span><br><span class="line"># SECURITY WARNING: don&apos;t run with debug turned on in production!</span><br><span class="line">DEBUG = False   #进行调试模式 True为开启</span><br><span class="line"># If this flag set to False, then user can&apos;t register account.</span><br><span class="line">IS_REGISTER_PERIOD = True</span><br><span class="line">ALLOWED_HOSTS = [&apos;127.0.0.1&apos;]</span><br><span class="line"># Application definition  创建的app应用定义到这里</span><br><span class="line">INSTALLED_APPS = (</span><br><span class="line">    &apos;django.contrib.admin&apos;, #管理员站点</span><br><span class="line">    &apos;django.contrib.auth&apos;,#用户验证框架</span><br><span class="line">    &apos;django.contrib.contenttypes&apos;,#文件类型框架</span><br><span class="line">    &apos;django.contrib.sessions&apos;,#会话框架</span><br><span class="line">    &apos;django.contrib.messages&apos;,#消息框架</span><br><span class="line">    &apos;django.contrib.staticfiles&apos;,#静态资源管理框架</span><br><span class="line">    &apos;account&apos;,  #激活应用</span><br><span class="line">    &apos;home&apos;,</span><br><span class="line">    &apos;dashboard&apos;,</span><br><span class="line">    &apos;gameboard&apos;,</span><br><span class="line">    &apos;noticeboard&apos;,</span><br><span class="line">)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">中间件，介于request 和 response处理之间的一道处理过程，相对比较轻量级，并且在全局上改变，django的输入与输出，因为改变的是全局</span><br><span class="line">所以需要谨慎使用，用不好会影响性能，每一个中间件都会负责一个功能，例如AuthentictionMiddleware和session处理相关，</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">MIDDLEWARE_CLASSES = (</span><br><span class="line">    &apos;django.contrib.sessions.middleware.SessionMiddleware&apos;,</span><br><span class="line">    &apos;django.middleware.common.CommonMiddleware&apos;,</span><br><span class="line">    &apos;django.middleware.csrf.CsrfViewMiddleware&apos;,</span><br><span class="line">    &apos;django.contrib.auth.middleware.AuthenticationMiddleware&apos;,</span><br><span class="line">    &apos;django.contrib.auth.middleware.SessionAuthenticationMiddleware&apos;,</span><br><span class="line">    &apos;django.contrib.messages.middleware.MessageMiddleware&apos;,</span><br><span class="line">    &apos;django.middleware.clickjacking.XFrameOptionsMiddleware&apos;,</span><br><span class="line">    &apos;django.middleware.security.SecurityMiddleware&apos;,</span><br><span class="line">)</span><br><span class="line">ROOT_URLCONF = &apos;hexactf.urls&apos;#这个变量的值就是根URLconf的模块名，默认是urls.py 文件的模块名</span><br><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        &apos;BACKEND&apos;: &apos;django.template.backends.django.DjangoTemplates&apos;,</span><br><span class="line">        &apos;DIRS&apos;: [os.path.join(BASE_DIR, &quot;static&quot;, &quot;templates&quot;)],  #指定模板文件目录</span><br><span class="line">        &apos;APP_DIRS&apos;: True,</span><br><span class="line">        &apos;OPTIONS&apos;: &#123;</span><br><span class="line">            &apos;context_processors&apos;: [</span><br><span class="line">                &apos;django.template.context_processors.debug&apos;,</span><br><span class="line">                &apos;django.template.context_processors.request&apos;,</span><br><span class="line">                &apos;django.contrib.auth.context_processors.auth&apos;,</span><br><span class="line">                &apos;django.contrib.messages.context_processors.messages&apos;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br><span class="line">WSGI_APPLICATION = &apos;hexactf.wsgi.application&apos;</span><br><span class="line"># Database</span><br><span class="line"># https://docs.djangoproject.com/en/1.8/ref/settings/#databases</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    &apos;default&apos;: &#123;</span><br><span class="line">        &apos;ENGINE&apos;: &apos;django.db.backends.sqlite3&apos;,</span><br><span class="line">        &apos;NAME&apos;: os.path.join(BASE_DIR, &apos;db.sqlite3&apos;),</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    &apos;default&apos;: &#123;</span><br><span class="line">        &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,  #数据库引擎</span><br><span class="line">        &apos;NAME&apos;: &apos;database_name&apos;,</span><br><span class="line">        &apos;USER&apos;: &apos;mysql_id&apos;,</span><br><span class="line">        &apos;PASSWORD&apos;: &apos;mysql_passwd&apos;,</span><br><span class="line">        &apos;HOST&apos;: &apos;localhost&apos;,</span><br><span class="line">        &apos;PORT&apos;: &apos;&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># Internationalization</span><br><span class="line"># https://docs.djangoproject.com/en/1.8/topics/i18n/</span><br><span class="line">LANGUAGE_CODE = &apos;ko-kr&apos;  #语言</span><br><span class="line">TIME_ZONE = &apos;Asia/Seoul&apos;  #时区</span><br><span class="line">USE_I18N = True  #语言</span><br><span class="line">USE_L10N = True  #数据和时间格式</span><br><span class="line">USE_TZ = False   #是否启用时区</span><br><span class="line"># Static files (CSS, JavaScript, Images)</span><br><span class="line"># https://docs.djangoproject.com/en/1.8/howto/static-files/</span><br><span class="line">STATIC_URL = &apos;/static/&apos;</span><br><span class="line">LOGIN_URL = &apos;/account/sign_in/&apos;</span><br><span class="line">LOGOUT_URL = &apos;/account/sign_out/&apos;</span><br><span class="line">MEDIA_ROOT = os.path.join(BASE_DIR, &apos;static&apos;)</span><br><span class="line">MEDIA_URL = &apos;/media/&apos;</span><br><span class="line">if DEBUG:</span><br><span class="line">        STATIC_ROOT = os.path.join(BASE_DIR, &apos;/static&apos;, &apos;static&apos;)</span><br><span class="line">else:</span><br><span class="line">        STATIC_ROOT = os.path.join(BASE_DIR, &apos;static&apos;, &apos;static&apos;)</span><br><span class="line">STATICFILES_DIRS = os.path.join(BASE_DIR, &quot;static&quot;, &quot;static&quot;),</span><br></pre></td></tr></table></figure></p>
+<p>创建app<br>    $python manage startapp blog<br>编写一个MVT<br>    例子的层级目录如下<br><img src="1.jpg" alt=""><br>首先我们创建好了blog app 添加到settings.py 中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = (</span><br><span class="line">    &apos;django.contrib.admin&apos;,</span><br><span class="line">    &apos;django.contrib.auth&apos;,</span><br><span class="line">    &apos;django.contrib.contenttypes&apos;,</span><br><span class="line">    &apos;django.contrib.sessions&apos;,</span><br><span class="line">    &apos;django.contrib.messages&apos;,</span><br><span class="line">    &apos;django.contrib.staticfiles&apos;,</span><br><span class="line">    &apos;blog&apos;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>本例子中涉及到model中的相关内容在model.py中，model.py中的代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#coding:utf-8</span><br><span class="line">from django.db import models</span><br><span class="line">from django.contrib.auth.models import User</span><br><span class="line"># Create your models here.</span><br><span class="line">#  创建数据库表</span><br><span class="line">#step1：类名就是数据库中的表名，要继承models</span><br><span class="line">class Category(models.Model):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Django 要求模型必须继承 models.Model 类。</span><br><span class="line">    Category 只需要一个简单的分类名 name 就可以了。</span><br><span class="line">    CharField 指定了分类名 name 的数据类型，CharField 是字符型，</span><br><span class="line">    CharField 的 max_length 参数指定其最大长度，超过这个长度的分类名就不能被存入数据库。</span><br><span class="line">    当然 Django 还为我们提供了多种其它的数据类型，如日期时间类型 DateTimeField、整数类型 IntegerField 等等。</span><br><span class="line">    Django 内置的全部类型可查看文档：</span><br><span class="line">    https://docs.djangoproject.com/en/1.10/ref/models/fields/#field-types</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    name = models.CharField(max_length=100)</span><br><span class="line">    #python3  使用str  把对象以字符串形式显示  shell模式下all()函数可以显示数据</span><br><span class="line">    #python2.7  使用unicode</span><br><span class="line">    def __unicode__(self):</span><br><span class="line">        return self.name</span><br><span class="line">    # def __str__(self):</span><br><span class="line">    #     return self.name</span><br><span class="line">class Tag(models.Model):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    标签 Tag 也比较简单，和 Category 一样。</span><br><span class="line">    再次强调一定要继承 models.Model 类！</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    name = models.CharField(max_length=100)</span><br><span class="line">    def __unicode__(self):</span><br><span class="line">        return self.name</span><br><span class="line">    # def __str__(self):</span><br><span class="line">    #     return self.name</span><br><span class="line">class New(models.Model):</span><br><span class="line">    # 文章标题</span><br><span class="line">    title = models.CharField(max_length=70)</span><br><span class="line">    # 文章正文，我们使用了 TextField。</span><br><span class="line">    # 存储比较短的字符串可以使用 CharField，但对于文章的正文来说可能会是一大段文本，因此使用 TextField 来存储大段文本。</span><br><span class="line">    body = models.TextField()</span><br><span class="line">    # 这两个列分别表示文章的创建时间和最后一次修改时间，存储时间的字段用 DateTimeField 类型。</span><br><span class="line">    created_time = models.DateTimeField()</span><br><span class="line">    modified_time = models.DateTimeField()</span><br><span class="line">    # 文章摘要，可以没有文章摘要，但默认情况下 CharField 要求我们必须存入数据，否则就会报错。</span><br><span class="line">    # 指定 CharField 的 blank=True 参数值后就可以允许空值了。</span><br><span class="line">    excerpt = models.CharField(max_length=200, blank=True)</span><br><span class="line">    # 这是分类与标签，分类与标签的模型我们已经定义在上面。</span><br><span class="line">    # 我们在这里把文章对应的数据库表和分类、标签对应的数据库表关联了起来，但是关联形式稍微有点不同。</span><br><span class="line">    # 我们规定一篇文章只能对应一个分类，但是一个分类下可以有多篇文章，所以我们使用的是 ForeignKey，即一对多的关联关系。</span><br><span class="line">    # 而对于标签来说，一篇文章可以有多个标签，同一个标签下也可能有多篇文章，所以我们使用 ManyToManyField，表明这是多对多的关联关系。</span><br><span class="line">    # 同时我们规定文章可以没有标签，因此为标签 tags 指定了 blank=True。</span><br><span class="line">    # 如果你对 ForeignKey、ManyToManyField 不了解，请看教程中的解释，亦可参考官方文档：</span><br><span class="line">    # https://docs.djangoproject.com/en/1.10/topics/db/models/#relationships</span><br><span class="line">    category = models.ForeignKey(Category)</span><br><span class="line">    tags = models.ManyToManyField(Tag, blank=True)</span><br><span class="line">    # 文章作者，这里 User 是从 django.contrib.auth.models 导入的。</span><br><span class="line">    # django.contrib.auth 是 Django 内置的应用，专门用于处理网站用户的注册、登录等流程，User 是 Django 为我们已经写好的用户模型。+</span><br><span class="line">    # 这里我们通过 ForeignKey 把文章和 User 关联了起来。</span><br><span class="line">    # 因为我们规定一篇文章只能有一个作者，而一个作者可能会写多篇文章，因此这是一对多的关联关系，和 Category 类似。</span><br><span class="line">    author = models.ForeignKey(User)</span><br><span class="line">    def __unicode__(self):</span><br><span class="line">        return self.title</span><br></pre></td></tr></table></figure></p>
+<p>在settings.py中查看数据库的配置信息，创建数据库<br>准备工作完成之后我们需要执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$python manage.py makemigrations</span><br><span class="line">$python manage.py migrate</span><br></pre></td></tr></table></figure></p>
+<p>所以我们直接在blog目录下的views.py中编写代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#coding:utf-8</span><br><span class="line">from django.shortcuts import render</span><br><span class="line">from models import New</span><br><span class="line">from  django.http import HttpResponse</span><br><span class="line">from forms import AddForm</span><br><span class="line"># Create your views here.</span><br><span class="line">#直接使用Views 把数据推送到Template中进行浏览器显示</span><br><span class="line">def index(request):</span><br><span class="line">    return HttpResponse(&apos;欢迎来到博客首页！&lt;a href=&quot;/show&quot;&gt;show&lt;/a&gt; &lt;a href=&quot;/add&quot;&gt;add&lt;/a&gt;&apos;)</span><br><span class="line">def show(request):</span><br><span class="line">    new_list=New.objects.all()</span><br><span class="line">    return render(request,&apos;blog/show.html&apos;,&#123;&apos;new_list&apos;:new_list&#125;)</span><br><span class="line">def add(request):</span><br><span class="line">    if request.method == &apos;POST&apos;:</span><br><span class="line">        form = AddForm(request.POST)</span><br><span class="line">        if form.is_valid():</span><br><span class="line">            a=form.cleaned_data[&apos;a&apos;]</span><br><span class="line">            b=form.cleaned_data[&apos;b&apos;]</span><br><span class="line">            return HttpResponse(str(int(a)+int(b)))</span><br><span class="line">    else:</span><br><span class="line">        form=AddForm()</span><br><span class="line">    return render(request,&apos;blog/add.html&apos;,&#123;&apos;form&apos;:form&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>代码的说明之后的内容会详细讲到，目前是先这样了解用着。<br>有了Views中的内容之后，我们怎样把它推送给客户浏览器上进行显示。<br>之后我们需要在blog目录下的urls.py中进行设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from django.conf.urls import url</span><br><span class="line">from . import views</span><br><span class="line">urlpatterns=[</span><br><span class="line">    url(r&apos;^$&apos;,views.index,name=&apos;index&apos;),</span><br><span class="line">    url(r&apos;^show/$&apos;,views.show),</span><br><span class="line">    url(r&apos;^add/$&apos;,views.add),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>我们来创建templates这里我们有两种的创建方式，一种是统一在项目的根目录下创建一个templates文件然后里面创建app的名字文件夹本例子中使用的就是这一种，还有一种就是在app blog目录下创建templates文件夹，只是在变代码的时候模板文件路径略有不同而已。<br>模板文件的代码show.html</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;table border=&quot;1xp&quot;&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;th&gt;标题&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;内容&lt;/th&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;/thead&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">        &#123;% for line in new_list %&#125;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;&#123;&#123; line.title &#125;&#125;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&#123;&#123; line.body &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line">    &lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>add.html如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form method=&quot;post&quot;&gt;</span><br><span class="line">    &#123;% csrf_token %&#125;</span><br><span class="line">    &#123;&#123; form&#125;&#125;</span><br><span class="line">    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>需要使Django找打模板文件的路径<br>还需要在settings.py中设置DIRS<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        &apos;BACKEND&apos;: &apos;django.template.backends.django.DjangoTemplates&apos;,</span><br><span class="line">        &apos;DIRS&apos;: [os.path.join(BASE_DIR, &apos;templates&apos;)],</span><br><span class="line">        &apos;APP_DIRS&apos;: True,</span><br><span class="line">        &apos;OPTIONS&apos;: &#123;</span><br><span class="line">            &apos;context_processors&apos;: [</span><br><span class="line">                &apos;django.template.context_processors.debug&apos;,</span><br><span class="line">                &apos;django.template.context_processors.request&apos;,</span><br><span class="line">                &apos;django.contrib.auth.context_processors.auth&apos;,</span><br><span class="line">                &apos;django.contrib.messages.context_processors.messages&apos;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>最后实现了一个简单的mvt模式，但是之中的内容还需要私下底查一些相关的资料，进行详细的学习。</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>本篇的学习，我们了解了Django的MVT模式，本篇的内容还得学习一些Django 中相关操作。代码上传到了github了<a href="https://github.com/Huseck/Django-study/tree/Django-study-2" target="_blank" rel="noopener">https://github.com/Huseck/Django-study/tree/Django-study-2</a> 下载配置的问题需要把blog目录下migrations目录下的 inital.py之类的文件删除然后数据迁移<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$python manage.py makemigrations </span><br><span class="line">$python manage.py migrate</span><br><span class="line">$python manage.py runserver</span><br></pre></td></tr></table></figure></p>
+<p>如以下的相关知识点</p>
+<ol>
+<li>Django 处理Form表单的操作</li>
+<li>url正则的知识点</li>
+<li>模板代码 操作</li>
+<li>Django 怎么处理url参数的传递的</li>
+</ol>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/01/26/Django-学习笔记-一/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/02/01/Django学习笔记-三/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Django学习笔记-二" 
+      data-title="Django学习笔记(二)" data-url="https://www.xjseck.com/2018/01/28/Django学习笔记-二/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

