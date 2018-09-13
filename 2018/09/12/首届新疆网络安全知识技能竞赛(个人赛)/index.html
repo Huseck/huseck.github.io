@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>首届新疆网络安全知识技能竞赛(个人赛) | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF,攻防," />
+  
+
+  <meta name="description" content="前言这次比赛也算是一个疆内CTF比赛的一个摸底，将会今后疆内比赛发展的一个趋势，此次参加比赛的团体有来自全国各地的64个团体、137名个人，共329名选手参赛。为期三天的比赛，也算是走过了全程，前两天的个人和团体的刷题晋级赛和第三天的个人和团体的攻防赛，我带的两个队伍双双都挺进了决赛，最后选择两个人决赛和两个队伍的团体决赛的模式，完成了此次比赛。之前也是立了一个FLAG，就是疆内的比赛我们绝对要拼">
+<meta name="keywords" content="CTF,攻防">
+<meta property="og:type" content="article">
+<meta property="og:title" content="首届新疆网络安全知识技能竞赛(个人赛)">
+<meta property="og:url" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="前言这次比赛也算是一个疆内CTF比赛的一个摸底，将会今后疆内比赛发展的一个趋势，此次参加比赛的团体有来自全国各地的64个团体、137名个人，共329名选手参赛。为期三天的比赛，也算是走过了全程，前两天的个人和团体的刷题晋级赛和第三天的个人和团体的攻防赛，我带的两个队伍双双都挺进了决赛，最后选择两个人决赛和两个队伍的团体决赛的模式，完成了此次比赛。之前也是立了一个FLAG，就是疆内的比赛我们绝对要拼">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/wang1.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/xuanshou.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/maomao.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/maomao1.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/maomao2.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/8.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/8-1.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/8-11.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/flag.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/cap1.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/cap2.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/cap3.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/ezsql.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/sanlan.png">
+<meta property="og:updated_time" content="2018-09-13T07:33:16.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="首届新疆网络安全知识技能竞赛(个人赛)">
+<meta name="twitter:description" content="前言这次比赛也算是一个疆内CTF比赛的一个摸底，将会今后疆内比赛发展的一个趋势，此次参加比赛的团体有来自全国各地的64个团体、137名个人，共329名选手参赛。为期三天的比赛，也算是走过了全程，前两天的个人和团体的刷题晋级赛和第三天的个人和团体的攻防赛，我带的两个队伍双双都挺进了决赛，最后选择两个人决赛和两个队伍的团体决赛的模式，完成了此次比赛。之前也是立了一个FLAG，就是疆内的比赛我们绝对要拼">
+<meta name="twitter:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/wang1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#个人刷题晋级赛"><span class="toc-text">个人刷题晋级赛</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#misc题解"><span class="toc-text">misc题解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">misc题解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web题解"><span class="toc-text">Web题解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Web题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#密码题"><span class="toc-text">密码题</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-首届新疆网络安全知识技能竞赛(个人赛)" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">首届新疆网络安全知识技能竞赛(个人赛)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.09.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/比赛/">比赛</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-首届新疆网络安全知识技能竞赛(个人赛)"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这次比赛也算是一个疆内CTF比赛的一个摸底，将会今后疆内比赛发展的一个趋势，此次参加比赛的团体有来自全国各地的64个团体、137名个人，共329名选手参赛。为期三天的比赛，也算是走过了全程，前两天的个人和团体的刷题晋级赛和第三天的个人和团体的攻防赛，我带的两个队伍双双都挺进了决赛，最后选择两个人决赛和两个队伍的团体决赛的模式，完成了此次比赛。之前也是立了一个FLAG，就是疆内的比赛我们绝对要拼尽全力，也必须在疆内的高校队伍中排上前两名，这次也算是完成了这个flag，最终挺进决赛的高校队伍也就只剩下新疆师范大学-大象安全和大象与安全队伍了。为了这次比赛我们做了一个赛后的详细的复盘，包括攻防赛。</p>
+<h2 id="个人刷题晋级赛"><a href="#个人刷题晋级赛" class="headerlink" title="个人刷题晋级赛"></a>个人刷题晋级赛</h2><p>个人赛期间比较蛇皮，状态什么的没有调整好，赛前 还给别人进行培训，结果参赛时，什么都不会，一些客观原因，导致比赛也不是很顺利，搞了两个选手的shell，导致很蛇皮。这里就复盘隐写、密码和web题目<br><img src="wang1.png" alt=""><br><img src="xuanshou.png" alt=""></p>
+<h3 id="misc题解"><a href="#misc题解" class="headerlink" title="misc题解"></a><h2>misc题解</h2></h3><ul>
+<li><p><strong>躲猫猫</strong><br>拿到题目，发现是png文件，但是不行正常浏览图片，查看属性发现1M多，应该是包含了其他内容，使用binwalk发现，发现文件是从pdf文件格式开始的，我们可以尝试修改文件的后缀名为PDF（一般文件预浏览的话都是从文件内容格式的最开始的文件格式进行的），可以正常浏览，然后ctrl+a全选是否有隐藏的文字<br><img src="maomao.png" alt=""><br><img src="maomao1.png" alt=""><br><strong>坑点</strong> 使用foremost 等工具解压出来的文件，也会有一个pdf，但是ctrl+a发现是一个假的flag<br><img src="maomao2.png" alt=""></p>
+</li>
+<li><p><strong>第8号</strong><br>常规的过一遍stegsolve和binwalk没有发现什么问题，那就手动浏览一下十六进制，图片是jpeg，一ff 8d 开始，应该是ff 9d 结束，发现后面隐藏的有数据信息，foremost 也没提取到什么信息，就手动提取一下十六进制，导出文件。<br><img src="8.png" alt=""><br>应该是“当铺密码”</p>
+</li>
+</ul>
+<p><img src="8-1.png" alt=""><br>然后我们把 大量出现的数字46、63、33转字符<br><img src="8-11.png" alt=""><br>搜索一下 发现时0ok！解密<br><a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">https://www.splitbrain.org/services/ook</a><br>flag{0ok_1_Ook}</p>
+<ul>
+<li><strong>task_give_you_flag</strong></li>
+</ul>
+<p>一个gif文件，使用stegsolve浏览每一帧的图片信息，最后一帧出现一个二维码的图片，发现缺3个角，那就找一个完整的二维码，补一下角。<br><img src="flag.png" alt=""></p>
+<ul>
+<li><strong>流量包解密01</strong><br>直接使用<br>aircrack-ng 爆破，发现在跑IV，说明就是wpe加密的握手包，密码为<code>[ 42:43:31:33:46 ] (ASCII: BC13F )</code> 直接wireshark进行解密<br><img src="cap1.png" alt=""><br>浏览一下 http 协议<br>最后发现<br><img src="cap2.png" alt=""><br><img src="cap3.png" alt=""><br><strong>妈耶</strong>最后发现，这个不是就是国赛出题的师傅吗，当时还私聊进行过交流，结果还是败给师傅了。:)太强了</li>
+</ul>
+<h3 id="Web题解"><a href="#Web题解" class="headerlink" title="Web题解"></a><h2>Web题解</h2></h3><ul>
+<li><strong>LFI</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">    $file = isset($_GET[&apos;file&apos;]) ? $_GET[&apos;file&apos;] : NULL;</span><br><span class="line">    if(stripos($file, &apos;flag.php&apos;) !== false &amp;&amp; stripos($file, &apos;base64&apos;) === false) &#123;</span><br><span class="line">        include($file);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &apos;flag.php 中有你想要的&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>stripos函数是二进制安全目前没有办法绕过，只能考虑替换base64功能的过滤器进行文件的编码读取<br>参考<code>https://lorexxar.cn/2016/09/14/php-wei/</code><br>最后payload ：<code>file=php://filter/read=string.rot13/resource=flag.php</code></p>
+<ul>
+<li><strong>ezsqli</strong><br>手工测试，发现是回现注入，过滤的关键字比较多，大概测试了，过滤了information和flag字段，这样就卡死了不能使用union select from通过mysql的内置数据库查询数据了，<br>手工大致猜测了一下数据库和表和字段<br><code>http://10.98.98.25:5551/index.php?id=-1&#39; union select 1,database(),3 || &#39;1&#39;=&#39;1</code><br>ctf  数据库  info 表 字段 phone  username password  email<br>感觉有点类似ddctf的过滤字段名的注入<br>最后本地测试了一下<br>源表中的数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+----+----------+------------+---------------------+</span><br><span class="line">| id | username | password   | flag                |</span><br><span class="line">+----+----------+------------+---------------------+</span><br><span class="line">|  1 | Dumb     | Dumb       | NULL                |</span><br><span class="line">|  2 | Angelina | I-kill-you | NULL                |</span><br><span class="line">|  3 | Dummy    | p@ssword   | xjnu&#123;ctf-is-there!&#125; |</span><br><span class="line">|  4 | secure   | crappy     | NULL                |</span><br><span class="line">|  5 | stupid   | stupidity  | NULL                |</span><br><span class="line">|  6 | superman | genious    | NULL                |</span><br><span class="line">|  7 | batman   | mob!le     | NULL                |</span><br><span class="line">|  8 | admin    | 2122       | NULL                |</span><br><span class="line">|  9 | 0        | 0          | NULL                |</span><br><span class="line">| 10 | seck     | test       | NULL                |</span><br><span class="line">| 11 | seck     | test       | NULL                |</span><br><span class="line">| 20 | 114      | 123456     | 2332                |</span><br><span class="line">| 21 | 0        | 123456     | 2332                |</span><br><span class="line">| 22 | 1        | 123456     | 2332                |</span><br><span class="line">+----+----------+------------+---------------------+</span><br><span class="line">14 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="ezsql.png" alt=""></p>
+<ul>
+<li><p><strong>Curl</strong><br>访问题目出现一个输入框，随便填上一些地址，发现有waf，当时测试发现是ip的10进制可以进行访问，然后爆破了一波端口，发现就3306端口开着，一直没有办法，考点应该是通过伪协议进行文件的读取，但是发现file、http、等协议被过滤，当时没有想到是绕过这两个关键字，赛后才知道是file协议的大写绕过，直接读flag文件:<br>payload:<code>curl=FILE:///flag</code></p>
+</li>
+<li><p><strong>sha1</strong><br>这个很常见的php的一些加密函数不能处理数组，如md5、sha1</p>
+</li>
+</ul>
+<h2 id="密码题"><a href="#密码题" class="headerlink" title="密码题"></a>密码题</h2><ul>
+<li><p><strong>mystical_sign</strong><br><code>c2p9eWJfZ25hbHZ0X2Jfe2xoZ2JuX3JsdA==</code><br>解密出来<br><code>sj}yb_gnalvt_b_{lhgbn_rlt</code> 看起来比较想栅栏加密，然后进行 栅栏解密<br><a href="http://ctf.ssleye.com/railfence.html" target="_blank" rel="noopener">http://ctf.ssleye.com/railfence.html</a><br><img src="sanlan.png" alt=""><br><code>synt{blnl_abj_lbh_trg_vg}</code><br>然后进行凯撒偏移<br><code>flag{oyay_now_you_get_it}</code><br>这道题应该和sctf的签到题差不多。</p>
+</li>
+<li><p><strong>task_simple_RSA</strong></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">小明得到了一个RSA加密信息，你能帮他解开吗？</span><br><span class="line"></span><br><span class="line">c=27990707239527629138352696377606718299992092729307910015562504696905353450041</span><br><span class="line"></span><br><span class="line">n=41069065654959614597750207738698085798765257876378561837894254544512565197793</span><br><span class="line"></span><br><span class="line">e=11</span><br></pre></td></tr></table></figure>
+<p>题目直接给了n、c、e，那我们可以对n进行分解出p和q<br><code>p = 218538667198531171522213512860093810267 q = 187925853952657607512617865502535480179</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line">n = <span class="number">41069065654959614597750207738698085798765257876378561837894254544512565197793</span></span><br><span class="line">c = <span class="number">27990707239527629138352696377606718299992092729307910015562504696905353450041</span></span><br><span class="line">e = long(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line">p = <span class="number">218538667198531171522213512860093810267</span></span><br><span class="line">q = <span class="number">187925853952657607512617865502535480179</span></span><br><span class="line"></span><br><span class="line">d = long(gmpy.invert(e,(p<span class="number">-1</span>)*(q<span class="number">-1</span>)))</span><br><span class="line"></span><br><span class="line">key = RSA.construct((n,e,d))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> key</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> key.decrypt(c)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> hex(key.decrypt(c))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> hex(key.decrypt(c))[<span class="number">2</span>:<span class="number">-1</span>].decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>flag为：<code>ABCEF!th1s_was_very_hot_outside!</code></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/07/16/从头开始SRC漏洞挖掘/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-首届新疆网络安全知识技能竞赛(个人赛)" 
+      data-title="首届新疆网络安全知识技能竞赛(个人赛)" data-url="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
