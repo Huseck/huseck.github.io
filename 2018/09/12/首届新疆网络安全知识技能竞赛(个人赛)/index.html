@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/cap3.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/ezsql.png">
 <meta property="og:image" content="https://www.xjseck.com/2018/09/12/首届新疆网络安全知识技能竞赛(个人赛)/sanlan.png">
-<meta property="og:updated_time" content="2018-09-14T06:01:41.345Z">
+<meta property="og:updated_time" content="2018-09-14T06:30:57.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="首届新疆网络安全知识技能竞赛(个人赛)">
 <meta name="twitter:description" content="前言这次比赛也算是一个疆内CTF比赛的一个摸底，将会今后疆内比赛发展的一个趋势，此次参加比赛的团体有来自全国各地的64个团体、137名个人，共329名选手参赛。为期三天的比赛，也算是走过了全程，前两天的个人和团体的刷题晋级赛和第三天的个人和团体的攻防赛，我带的两个队伍双双都挺进了决赛，最后选择两个人决赛和两个队伍的团体决赛的模式，完成了此次比赛。之前也是立了一个FLAG，就是疆内的比赛我们绝对要拼">
@@ -178,7 +178,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#个人刷题晋级赛"><span class="toc-text">个人刷题晋级赛</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#misc题解"><span class="toc-text">misc题解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">misc题解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web题解"><span class="toc-text">Web题解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-text">Web题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#密码题"><span class="toc-text">密码题</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#个人刷题晋级赛"><span class="toc-text">个人刷题晋级赛</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#misc题解"><span class="toc-text">misc题解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web题解"><span class="toc-text">Web题解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#密码题"><span class="toc-text">密码题</span></a></li></ol>
   </div>
 
 
@@ -231,7 +231,7 @@
     
       <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这次比赛也算是一个疆内CTF比赛的一个摸底，将会今后疆内比赛发展的一个趋势，此次参加比赛的团体有来自全国各地的64个团体、137名个人，共329名选手参赛。为期三天的比赛，也算是走过了全程，前两天的个人和团体的刷题晋级赛和第三天的个人和团体的攻防赛，我带的两个队伍双双都挺进了决赛，最后选择两个人决赛和两个队伍的团体决赛的模式，完成了此次比赛。之前也是立了一个FLAG，就是疆内的比赛我们绝对要拼尽全力，也必须在疆内的高校队伍中排上前两名，这次也算是完成了这个flag，最终挺进决赛的高校队伍也就只剩下新疆师范大学-大象安全和大象与安全队伍了。为了这次比赛我们做了一个赛后的详细的复盘，包括攻防赛。</p>
 <h2 id="个人刷题晋级赛"><a href="#个人刷题晋级赛" class="headerlink" title="个人刷题晋级赛"></a>个人刷题晋级赛</h2><p>个人赛期间比较蛇皮，状态什么的没有调整好，赛前 还给别人进行培训，结果参赛时，什么都不会，一些客观原因，导致比赛也不是很顺利，搞了两个选手的shell，导致很蛇皮。这里就复盘隐写、密码和web题目<br><img src="wang1.png" alt=""><br><img src="xuanshou.png" alt=""></p>
-<h3 id="misc题解"><a href="#misc题解" class="headerlink" title="misc题解"></a><h2>misc题解</h2></h3><ul>
+<h3 id="misc题解"><a href="#misc题解" class="headerlink" title="misc题解"></a>misc题解</h3><ul>
 <li><p><strong>躲猫猫</strong><br>拿到题目，发现是png文件，但是不行正常浏览图片，查看属性发现1M多，应该是包含了其他内容，使用binwalk发现，发现文件是从pdf文件格式开始的，我们可以尝试修改文件的后缀名为PDF（一般文件预浏览的话都是从文件内容格式的最开始的文件格式进行的），可以正常浏览，然后ctrl+a全选是否有隐藏的文字<br><img src="maomao.png" alt=""><br><img src="maomao1.png" alt=""><br><strong>坑点</strong> 使用foremost 等工具解压出来的文件，也会有一个pdf，但是ctrl+a发现是一个假的flag<br><img src="maomao2.png" alt=""></p>
 </li>
 <li><p><strong>第8号</strong><br>常规的过一遍stegsolve和binwalk没有发现什么问题，那就手动浏览一下十六进制，图片是jpeg，一ff 8d 开始，应该是ff 9d 结束，发现后面隐藏的有数据信息，foremost 也没提取到什么信息，就手动提取一下十六进制，导出文件。<br><img src="8.png" alt=""><br>应该是“当铺密码”</p>
@@ -245,7 +245,7 @@
 <ul>
 <li><strong>流量包解密01</strong><br>直接使用<br>aircrack-ng 爆破，发现在跑IV，说明就是wpe加密的握手包，密码为<code>[ 42:43:31:33:46 ] (ASCII: BC13F )</code> 直接wireshark进行解密<br><img src="cap1.png" alt=""><br>浏览一下 http 协议<br>最后发现<br><img src="cap2.png" alt=""><br><img src="cap3.png" alt=""><br><strong>妈耶</strong>最后发现，这个不是就是国赛出题的师傅吗，当时还私聊进行过交流，结果还是败给师傅了。:)太强了</li>
 </ul>
-<h3 id="Web题解"><a href="#Web题解" class="headerlink" title="Web题解"></a><h2>Web题解</h2></h3><ul>
+<h3 id="Web题解"><a href="#Web题解" class="headerlink" title="Web题解"></a>Web题解</h3><ul>
 <li><strong>LFI</strong><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    $file = <span class="keyword">isset</span>($_GET[<span class="string">'file'</span>]) ? $_GET[<span class="string">'file'</span>] : <span class="keyword">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(stripos($file, <span class="string">'flag.php'</span>) !== <span class="keyword">false</span> &amp;&amp; stripos($file, <span class="string">'base64'</span>) === <span class="keyword">false</span>) &#123;</span><br><span class="line">        <span class="keyword">include</span>($file);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'flag.php 中有你想要的'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
